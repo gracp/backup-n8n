@@ -1,0 +1,484 @@
+{
+  "active": false,
+  "connections": {
+    "Loop over Items 1": {
+      "main": [
+        [
+          {
+            "node": "Result1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add param1 to output1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop over Items 2": {
+      "main": [
+        [
+          {
+            "node": "Result2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait one second(just for show)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add param1 to output1": {
+      "main": [
+        [
+          {
+            "node": "Loop over Items 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add param1 to output2": {
+      "main": [
+        [
+          {
+            "node": "Loop over Items 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add param1 to output3": {
+      "main": [
+        [
+          {
+            "node": "Result3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add param1 to output4": {
+      "main": [
+        [
+          {
+            "node": "Result4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add param1 to output5": {
+      "main": [
+        [
+          {
+            "node": "Result5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Paste JSON into this node": {
+      "main": [
+        [
+          {
+            "node": "Split Array of Strings into Array of Objects",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Add param1 to output5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Loop over Items 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait one second(just for show)": {
+      "main": [
+        [
+          {
+            "node": "Add param1 to output2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Array of Strings into Array of Objects": {
+      "main": [
+        [
+          {
+            "node": "Loop over Items 2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Add param1 to output4",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Add param1 to output3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-24T06:17:33.875Z",
+  "id": "HT0kqofXFBnd7Mz7",
+  "isArchived": false,
+  "meta": null,
+  "name": "Looping over items",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1a088df4-a4e2-461d-b1fd-5e46ebf0fde1",
+      "name": "Result1",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2560,
+        820
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "notes": "Look Here to see resulting output"
+    },
+    {
+      "parameters": {},
+      "id": "908278f2-366e-4a4d-a8e0-a990268145d9",
+      "name": "Result2",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2560,
+        1140
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "notes": "Look here to see resulting output"
+    },
+    {
+      "parameters": {
+        "content": "\n### Result1 shows that the array of strings is seen as one item by Loop1",
+        "height": 240,
+        "width": 320,
+        "color": 3
+      },
+      "id": "423d670a-b7b8-4f0d-bbf6-6b524c41aa88",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2480,
+        760
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Result2 shows that the Loop2 sees 5 items after the array of strings is split into separate objects",
+        "height": 260,
+        "width": 320,
+        "color": 3
+      },
+      "id": "71a9e2b4-138c-46e9-bee8-ec969b9aa064",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2480,
+        1040
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# N8N for Beginners: Looping Over Items\n\n## Description\n\nThis workflow is designed for **n8n beginners** to understand how n8n handles **looping (iteration)** over multiple items. It highlights two key behaviors:\n\n- **Built-In Looping:** By default, most n8n nodes iterate over each item in an input array.\n- **Explicit Looping:** The **Loop Over Items** node allows controlled iteration, enabling **custom batch processing** and multi-step workflows.\n\nThis workflow demonstrates the difference between processing an **unsplit array of strings (single item)** vs. **a split array (multiple items)**.\n\n---\n\n## Setup\n\n### 1. Input Data\n\nTo begin, **paste the following JSON** into the **Manual Trigger** node:\n\n```json\n{\n  \"urls\": [\n    \"https://www.reddit.com\",\n    \"https://www.n8n.io/\",\n    \"https://n8n.io/\",\n    \"https://supabase.com/\",\n    \"https://duckduckgo.com/\"\n  ]\n}\n```\n\nðŸ“Œ **Steps to Paste Data:**\n- **Double-click** the \"Manual Trigger\" node.\n- Click **\"Edit Output\"** (top-right corner).\n- Paste the JSON and **Save**.\n- The node **turns purple**, indicating that test data is pinned. \n\n---\n\n## Explanation of the n8n Nodes in the Workflow\n\n### Manual Trigger  \nThis node starts the workflow manually and sends test data.  \n**Documentation:** [Manual Trigger Node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.manualtrigger/)\n\n### Split Out (Split Array of Strings into Array of Objects)  \nExtracts the `urls` array and splits it so that each URL becomes a separate JSON object.  \n**Documentation:** [Split Out Node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.splitout/)\n\n### Loop Over Items (Loop Over Items 1)  \nDemonstrates how an **unsplit** array is treated as one item, processing it as a single unit.  \n**Documentation:** [Loop Over Items Node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.splitinbatches/)\n\n### Loop Over Items (Loop Over Items 2)  \nProcesses the **split array** one item at a time. This demonstrates individual iteration and controlled looping.  \n**Documentation:** [Loop Over Items Node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.splitinbatches/)\n\n### Wait Node  \nIntroduces a **1-second delay** per iteration to demonstrate sequential execution. This can be removed for faster performance.  \n**Documentation:** [Wait Node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.wait/)\n\n### Code Nodes (Add param1 to outputX)  \nEach Code node adds a constant field (`param1`) to the data, ensuring that every item gets enriched with the same parameter.  \n**Documentation:** [Code Node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.code/)\n\n### NoOp Nodes (Result1, Result2, Result3, Result4, Result5)\nThese nodes display the output at different stages of the workflow for inspection.\n**Documentation:** [NoOp Node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.noop/)\n\n\n\n---\n\n## Execution Details\n\n### 1. How the Workflow Runs\n\n- **Manual Trigger starts execution** with the pasted JSON data.\n- The workflow follows **two paths**:\n\n#### Unsplit Array Path â†’ Loop Over Items 1  \n- The original JSON is processed **as a single item**.  \n- **Result1 & Result5:** Show that the array was **not split** before processing.\n\n#### Split Array Path â†’ Split Out â†’ Loop Over Items 2  \n- The **Split Out** node converts the `urls` array into separate objects.\n- The **Loop Over Items 2** node processes each URL **one by one**.\n- A **Wait node** (1-second delay) demonstrates **controlled execution**.\n- **Code nodes** modify the JSON, adding the field (`param1`).\n- **Result2, Result3, Result4:** Display the final processed output.\n\n### 2. What You Will See\n\n- **Result1 & Result5:** The entire array is processed **as one item** before splitting.\n- **Result2, Result3, Result4:** Each URL is processed **individually** after being split.\n- **Wait Node:** Adds a **1-second delay per item** in **Loop Over Items 2**.\n\n---\n\n## Notes\n\n- Sticky notes are included in the workflow **for easy reference**.\n- The **Wait node** is **optional**â€”remove it for faster execution.\n- This template is structured for **beginners** but serves as a **building block** for more advanced automations.\n\n---\n\n",
+        "height": 2480,
+        "width": 1200
+      },
+      "id": "af05f2f7-e41c-49e1-a11e-00c70e27a3ba",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "urls",
+        "options": {
+          "destinationFieldName": "url"
+        }
+      },
+      "id": "e5f59a85-971b-4ad1-baaa-ece6c1838528",
+      "name": "Split Array of Strings into Array of Objects",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        1660,
+        1480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Result4 shows that we can turn off the looping feature by setting the looping behavior to \"Run Once For All Items\"",
+        "height": 260,
+        "width": 320,
+        "color": 3
+      },
+      "id": "f6435248-ef6e-43cd-961c-79878dcc58a4",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2480,
+        1800
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Result3 shows that looping over items is built in to n8n nodes",
+        "height": 240,
+        "width": 320,
+        "color": 3
+      },
+      "id": "29bba3e6-f91a-4cb5-b123-24ff141fe4eb",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2480,
+        1520
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "0c071cac-1711-448e-b573-99094bf6657f",
+      "name": "Result3",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2580,
+        1600
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "notes": "Look here to see resulting output"
+    },
+    {
+      "parameters": {},
+      "id": "fa1b7997-fb33-41e6-a3c7-2ec6dec10b4c",
+      "name": "Result4",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2580,
+        1880
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "notes": "Look here to see resulting output"
+    },
+    {
+      "parameters": {
+        "content": "### Result5 shows that the array of strings is seen as one item by Code5. So the behavior is the same as Loop1",
+        "height": 260,
+        "width": 320,
+        "color": 3
+      },
+      "id": "1ea67cba-dbb7-4061-8885-870f96fefb90",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2480,
+        460
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "093b589b-07da-4879-a363-42288b102058",
+      "name": "Result5",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2560,
+        560
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "notes": "Look here to see resulting output"
+    },
+    {
+      "parameters": {},
+      "id": "67c4da39-8386-40da-8b8a-2298c86a3aa3",
+      "name": "Paste JSON into this node",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        1280,
+        560
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "\n  $json.param1 =  'add_me_to_all_items_and_name_me_param1';\n\n\nreturn $json"
+      },
+      "id": "d21ec38f-1c0b-44ab-accb-d92165059daf",
+      "name": "Add param1 to output5",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2000,
+        560
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "\n  $json.param1 = \"add_me_to_all_items_and_name_me_param1\"\n\nreturn $json"
+      },
+      "id": "cf21d9c5-8ec6-4813-9306-9f7f4530b8a4",
+      "name": "Add param1 to output1",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2180,
+        920
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "a347fbce-51a5-43c9-8d62-c86ff1c4b158",
+      "name": "Loop over Items 2",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        2000,
+        1160
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "id": "af64c365-4384-4129-bed8-edc98756bd9e",
+      "name": "Loop over Items 1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        2000,
+        840
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "\n  $json.param1 =   \"add_me_to_all_items_and_name_me_param1\"\n\n\nreturn $json"
+      },
+      "id": "95a9c216-aa2c-42bd-acf2-a863ac5c00f0",
+      "name": "Add param1 to output2",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2360,
+        1320
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "\n  $json.param1 =   \"add_me_to_all_items_and_name_me_param1\"\n\n\nreturn $json"
+      },
+      "id": "b70e2229-7599-466f-bd4a-76dffad7280d",
+      "name": "Add param1 to output3",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2000,
+        1600
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "\n  $json.param1 =   \"add_me_to_all_items_and_name_me_param1\"\n\n\nreturn $json"
+      },
+      "id": "0a00768d-c002-4351-bf6e-ba06a7be4525",
+      "name": "Add param1 to output4",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2000,
+        1880
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "id": "8bc3fce5-677a-46d8-8ddc-23b5dec72b9f",
+      "name": "Wait one second(just for show)",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        2160,
+        1280
+      ],
+      "webhookId": "61aef80b-4e9d-43ae-a083-cd87b4fdec11",
+      "typeVersion": 1.1
+    }
+  ],
+  "pinData": {
+    "Paste JSON into this node": [
+      {
+        "json": {
+          "urls": [
+            "https://www.reddit.com",
+            "https://www.n8n.io/",
+            "https://n8n.io/",
+            "https://supabase.com/",
+            "https://duckduckgo.com/"
+          ]
+        }
+      }
+    ]
+  },
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-24T20:01:34.701Z",
+  "versionId": "7089646b-b1a7-4db1-9839-c1df117b6972"
+}
