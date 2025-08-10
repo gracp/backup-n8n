@@ -1,0 +1,820 @@
+{
+  "active": false,
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Extract from CSV",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from HTML",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from ODS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from RTF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from TXT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from XML",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from XLS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Validate Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Output": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from CSV": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from ODS": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from PDF": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from RTF": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from TXT": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from XLS": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from XML": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from HTML": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-25T05:45:27.335Z",
+  "id": "F2s0WQ7jeoeKgUIA",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Extract Structured Candidate Data from Resume",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "allowFileUploads": true
+        }
+      },
+      "id": "05af7618-98df-45d7-9f98-7e36661a464b",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        -440,
+        760
+      ],
+      "webhookId": "592787f5-230a-4e76-960c-6277f9faa9c8",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "fcf85095-1221-4490-9d30-e10d7c3b686c",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".csv"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "CSV"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "58e60d14-1beb-47b8-8789-6cee2b2bb224",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".html"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "HTML"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "afce5705-212f-4e56-ac34-8b99e15a0806",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".ods"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "ODS"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "bb223b8a-826c-488b-9eb7-b1b50a6aef7f",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".pdf"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "PDF"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "29d5bf9a-69fb-4e01-8ea9-2ca7c8b3fc9c",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".rtf"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "RTF"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "d2e22acb-adbb-43d9-8a18-70851be20ea5",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".txt"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "TXT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "257adc56-8632-4671-9237-4e233b95e3fe",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".xml"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "XML"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "d4673034-eaca-4f4c-9c37-104ffe0bb170",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "leftValue": "={{ $json.files[0].fileName.toLowerCase() }}",
+                    "rightValue": ".xls"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "XLS"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "9df36c24-2b83-417f-9ec2-ca929dec7139",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -220,
+        640
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "70ba1c39-f90f-44ac-9fdc-9a8a8d188484",
+              "name": "text",
+              "type": "string",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "179e056c-3dab-4fbc-9f1a-a613a9f2818b",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        440,
+        660
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a helpful assistant that extracts email, name, skills, and education from resume text. "
+        }
+      },
+      "id": "839e749d-52e8-418d-85c6-0ca7ed0dcf3e",
+      "name": "AI Agent1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        660,
+        660
+      ],
+      "typeVersion": 1.9
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"name\": \"Angel Menendez\",\n  \"email\": \"angel.menendez@example.com\",\n  \"skills\": \"JavaScript, Node.js, n8n, Docker, REST APIs\",\n  \"education\": \"B.S. in Computer Science, University of Arizona, 2010\"\n}\n"
+      },
+      "id": "0ba95215-0524-4633-b140-b78bd352ca66",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        820,
+        880
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4a062055-7dde-447e-ada1-0032f46af02a",
+              "name": "output.name",
+              "type": "string",
+              "value": "={{ $json.output.name }}"
+            },
+            {
+              "id": "bf28519f-f8e3-4b26-bee4-7758340df194",
+              "name": "output.email",
+              "type": "string",
+              "value": "={{ $json.output.email }}"
+            },
+            {
+              "id": "24975388-f25a-4c86-a995-9ec2cf819c13",
+              "name": "output.skills",
+              "type": "string",
+              "value": "={{ $json.output.skills }}"
+            },
+            {
+              "id": "c410f2d2-00e1-499b-9346-553164881465",
+              "name": "output.education",
+              "type": "string",
+              "value": "={{ $json.output.education }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5518d404-67af-4c45-b8f2-690ebd616abf",
+      "name": "Validate Output",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1040,
+        660
+      ],
+      "typeVersion": 3.4,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "id": "fdead79b-1571-4d0e-9302-2718bd5520c3",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1260,
+        560
+      ],
+      "typeVersion": 4.6,
+      "credentials": {},
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3fb8fe8f-a5f5-4c00-a8d2-39cd3e35615e",
+              "name": "output",
+              "type": "string",
+              "value": "Unable to parse the agent outputs"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2649f10a-0520-47dc-a6fc-70c20aa561bc",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1260,
+        760
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3fb8fe8f-a5f5-4c00-a8d2-39cd3e35615e",
+              "name": "output",
+              "type": "string",
+              "value": "Unable to parse the file data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "26739f0a-9846-431a-bfc9-654b93db8cbf",
+      "name": "Edit Fields2",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        0,
+        1520
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3fb8fe8f-a5f5-4c00-a8d2-39cd3e35615e",
+              "name": "output",
+              "type": "string",
+              "value": "=Name: {{ $json.output.name }}\nEmail: {{ $json.output.email }}\nSkills: {{ $json.output.skills }}\nEducation: {{ $json.output.education }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dea40c87-0564-498e-8076-01ef6eeb0f71",
+      "name": "Edit Fields3",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1480,
+        560
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "id": "09f04d78-dd14-40aa-b02f-7433ff32e122",
+      "name": "Extract from CSV",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        0,
+        -40
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "html",
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "id": "9f444ad7-240b-4395-9cbd-f27185f9820f",
+      "name": "Extract from HTML",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        220,
+        160
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "ods",
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "id": "75f3f27f-96d3-4575-b1fe-b0a21b433996",
+      "name": "Extract from ODS",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        220,
+        360
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "id": "e3aa329a-1453-43f6-bbee-6b68977fdb30",
+      "name": "Extract from PDF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        220,
+        560
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "rtf",
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "id": "482a2565-6a70-44e8-884f-77d9ea26ed7f",
+      "name": "Extract from RTF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        220,
+        760
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "binaryPropertyName": "data0",
+        "destinationKey": "text",
+        "options": {}
+      },
+      "id": "557afe50-0ec4-443a-8315-70cfa7e689eb",
+      "name": "Extract from TXT",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        220,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "xls",
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "id": "d32ac4b5-9ca8-472f-8e3c-c396ecaf120b",
+      "name": "Extract from XLS",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        220,
+        1360
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "xml",
+        "binaryPropertyName": "data0",
+        "destinationKey": "text",
+        "options": {}
+      },
+      "id": "45e2fd10-0b34-491f-bb73-d44df5844733",
+      "name": "Extract from XML",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        220,
+        1160
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "text",
+        "options": {}
+      },
+      "id": "49f4df1e-a36f-4b77-b075-8804cac646ed",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "position": [
+        220,
+        -40
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        620,
+        880
+      ],
+      "id": "5ceab125-11c7-4a5f-b226-d8a94d1ccb0b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "backups",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-25T05:45:45.214Z",
+  "versionId": "ccbbfcae-ccbc-490e-b496-5a4c682ae4e8"
+}
