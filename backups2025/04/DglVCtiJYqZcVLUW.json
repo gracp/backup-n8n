@@ -1,0 +1,743 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Application Copy": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Google Doc Proposal": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Mermaid.js": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Variable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variable": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Google Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Docs": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variable1": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-22T02:58:14.345Z",
+  "id": "DglVCtiJYqZcVLUW",
+  "isArchived": false,
+  "meta": null,
+  "name": "UPWORK_00. (COMPLETE) Upwork AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {},
+        "path": "62f2f127-f726-4857-b318-05a8aae543ea"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -200,
+        40
+      ],
+      "id": "24bdf652-cceb-4bdd-9b2c-2c013e91de7e",
+      "name": "When chat message received",
+      "webhookId": "62f2f127-f726-4857-b318-05a8aae543ea"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You're a helpful, intelligent Upwork assistant. Your task is to receive an Upwork job description and then use it to generate assets, like Mermaid diagrams, Google Docs, and Upwork application bodies. \n\nWhen you receive an Upwork job description, you *must* generate a Mermaid diagram, a Google Doc proposal, and an Upwork application. You must then replace the $$$ with the Google Doc proposal link.\n\nOutput the Google Doc proposal link in plaintext, like link: https://www..."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        180,
+        -60
+      ],
+      "id": "5d2e29d1-3567-410c-941f-139ca126e34c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        140,
+        160
+      ],
+      "id": "fd800b82-dbe5-4165-9fbd-a2c203be4927",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "name": "generate_upwork_application_copy",
+        "description": "Call this tool to generate Upwork application copy. The input will be an Upwork job description, and the output will be the Upwork application copy string from the tool.",
+        "workflowId": {
+          "__rl": true,
+          "value": "1DXBStjzG7KXCAys",
+          "mode": "list",
+          "cachedResultName": "UPWORK_01. Generate Application Copy"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        260,
+        160
+      ],
+      "id": "bc383285-0907-4b87-bfb6-bce6cb97f0ca",
+      "name": "Generate Application Copy"
+    },
+    {
+      "parameters": {
+        "name": "generate_google_doc_proposal",
+        "description": "Call this tool to generate a Google Doc proposal for an Upwork job. The input should be a string of an Upwork job post, and the output will be a proposal URL that you can use to fill in templates.",
+        "workflowId": {
+          "__rl": true,
+          "value": "RZjy3ub4ow30kOx5",
+          "mode": "list",
+          "cachedResultName": "UPWORK_02. Generate Google Doc Proposal"
+        },
+        "responsePropertyName": "urlOfProposal"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        380,
+        160
+      ],
+      "id": "2bf2bfb8-773b-442c-bb28-e4379972c3a2",
+      "name": "Generate Google Doc Proposal"
+    },
+    {
+      "parameters": {
+        "name": "generate_mermaid_diagram",
+        "description": "Call this tool to generate Mermaid.js diagram code. The input will be an Upwork job description, and the output will be the mermaid diagram code.",
+        "workflowId": {
+          "__rl": true,
+          "value": "IrvGoGNakAvKjjbw",
+          "mode": "list",
+          "cachedResultName": "UPWORK_03. Generate Mermaid Code"
+        },
+        "responsePropertyName": "mermaidCode"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        500,
+        160
+      ],
+      "id": "b5c8cad0-9193-4df4-8afb-863ee0d80904",
+      "name": "Generate Mermaid.js"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        500
+      ],
+      "id": "88c90f43-f5f0-4449-b3d9-9fcdadf1602d",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a helpful, intelligent Upwork application writer.",
+              "role": "system"
+            },
+            {
+              "content": "=I'm an automation specialist applying to jobs on freelance platforms.\n\nYour task is to take as input an Upwork job description and return as output a customized proposal.\n\nHigh-performing proposals are typically templated as follows:\n\n```\nHi, I do {thing} all the time. Am so confident I'm the right fit for you that I just created a workflow diagram + a demo of your {thing} in no-code: $$$\n\nAbout me: I'm a {relevantJobDescription} that has done {coolRelevantThing}. Of note, {otherCoolTieIn}.\n\nHappy to do this for you anytime—just respond to this proposal (else I don't get a chat window). \n\nThank you!\n```\n\nOutput your results in JSON using this format:\n\n{\"proposal\":\"Your proposal\"}\n\nRules:\n- $$$ is what we're using to replace links later on, so leave that untouched.\n- Write in a casual, spartan tone of voice.\n- Don't use emojis or flowery language.\n- If there's a name included somewhere in the description, add it after \"Hi\"\n\nSome facts about me for the personalization: {{ $json.aboutMe }}\n"
+            },
+            {
+              "content": "={\"jobDescription\":\"{{ $('Execute Workflow Trigger').item.json.query }}\"}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        240,
+        500
+      ],
+      "id": "32916327-2fb3-4b5b-b8ed-aba299eac9d4",
+      "name": "OpenAI"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e980c92c-07d9-400e-b40c-a8fbdbe8bbcb",
+              "name": "aboutMe",
+              "value": "I'm an AI and automation freelancer that builds outreach systems, CRM systems, project management systems, no-code systems, and integrations.|Some notable things I've done:- End to end project management for a $1M/yr copywriting agency- Outbound acquisition system that grew a content company from $10K/mo to $92K/mo in 12 mo- Monday.com CRM and PM for a recruiting company doing >$1M/yr- Automated content generation system for an SEO agency doing >$10M/yr- ClickUp CRM build for a marketing company doing $1M/yr- I run a Make.com community that does $100,000/mo- I run a YouTube channel about automation with over 50,000 subscribers- Email outreach system for a $MM San Diego real estate brokerage that closed $150K revenue in the first three days- Email outreach systems for a $200K/mo ecommerce dog treat company",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        20,
+        500
+      ],
+      "id": "6f1d90ba-20c4-4eae-a26c-80492873fc7e",
+      "name": "Set Variable"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "468a03c7-1537-435a-9f98-ce7c58a51c8b",
+              "name": "response",
+              "value": "={{ $json.message.content.proposal }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        600,
+        500
+      ],
+      "id": "ac2b3c74-cd5e-4e34-a765-c815ffcbddf3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "## 1. Generate Application Copy",
+        "height": 260,
+        "width": 1140,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        420
+      ],
+      "id": "9003e49a-7671-4842-b2ee-6320e6b7b324",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Top-Level Workflow\n",
+        "height": 400,
+        "width": 1020,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -100
+      ],
+      "id": "81a64abf-764f-410c-8d76-014d371daecd",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1rUO3VaO2yDGO5wf0Zz72gaG7e__wjXY26PJkX8h-Y00",
+          "mode": "list",
+          "cachedResultName": "Google Docs Upwork Proposal Template",
+          "cachedResultUrl": "https://docs.google.com/document/d/1rUO3VaO2yDGO5wf0Zz72gaG7e__wjXY26PJkX8h-Y00/edit?usp=drivesdk"
+        },
+        "name": "={{ $json.message.content.titleOfSystem }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        400,
+        800
+      ],
+      "id": "b8ecbf5d-fc09-42e0-a214-c9f6fa0530fb",
+      "name": "Google Drive"
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        620,
+        800
+      ],
+      "id": "17713c34-4c0a-41a2-9679-991bdc136fe3",
+      "name": "Google Drive1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $('Google Drive').item.json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "{{titleOfSystem}}",
+              "replaceText": "={{ $('OpenAI1').item.json.message.content.titleOfSystem }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{briefExplanationOfSystem}}",
+              "replaceText": "={{ $('OpenAI1').item.json.message.content.briefExplanationOfSystem }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{specificPartOfTheirRequest}}",
+              "replaceText": "={{ $('OpenAI1').item.json.message.content.specificPartOfTheirRequest }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{stepByStepBulletPoints}}",
+              "replaceText": "={{ $('OpenAI1').item.json.message.content.stepByStepBulletPoints }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{leftToRightFlowWithArrows}}",
+              "replaceText": "={{ $('OpenAI1').item.json.message.content.leftToRightFlowWithArrows }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{aboutMeBulletPoints}}",
+              "replaceText": "={{ $('OpenAI1').item.json.message.content.aboutMeBulletPoints }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        840,
+        800
+      ],
+      "id": "90f54f81-1b5c-4e87-86b3-f63737661c09",
+      "name": "Google Docs"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a helpful, intelligent proposal writer.",
+              "role": "system"
+            },
+            {
+              "content": "=I'm an automation specialist applying to jobs on freelance platforms.\n\nYour task is to take as input an Upwork job description and return as output JSON for a customized proposal (which I'll upload to Google Docs).\n\nHigh-performing proposals are typically templated as follows:\n\n```\n# {titleOfSystem} \n## {briefExplanationOfSystem}\n\nHi. As mentioned, I’m so confident I’m the right fit for this I went ahead and created a proposal for you, including a step-by-step of how I’d do it.\n\nI’ve done the below many times and working with {specificPartOfTheirRequest} is actually one of my favorite things to do. Talk about serendipity!\n\nAnyway, here’s how we'll build {paraphrasedSystem}:\n{stepByStepBulletPoints}\n\nSo basically, {leftToRightFlowWithArrows}.\n\nA little about me:\n{aboutMeBulletPoints}\n\nTo be upfront: my goal is to work with you on a long-term retainer, since I find it aligns incentives and lets me help clients better. So I'd treat everything we do together as foundational, and help you build systems that drive revenue/maximize cost savings. \n\nI am really confident I can blow this out of the park for you, so if this sounds like something you're into, just respond to my proposal on Upwork & we'll take it from there. \n\nThank you for your time!\n```\n\nOutput your results in JSON using this format:\n\n{\n  \"titleOfSystem\": \"\",\n  \"briefExplanationOfSystem\": \"\",\n  \"specificPartOfTheirRequest\": \"\",\n  \"stepByStepBulletPoints\": \"\",\n  \"leftToRightFlowWithArrows\": \"\",\n  \"aboutMeBulletPoints\": \"\",\n}\n\nRules:\n- Write in a casual, spartan tone of voice.\n- Don't use emojis or flowery language.\n- If there's a name included somewhere in the description, add it for personalization purposes.\n- Return \"stepByStepBulletPoints\" and \"aboutMeBulletPoints\" as strings, and delimit each bullet point with a \\n and make sure it includes a -\n- In \"aboutMeBulletPoints\", prefer to mention social proof that includes $ and numbers.\n- For \"leftToRightFlowWithArrows\", write a simplified left to right flow delimited by \"->\" strings. For instance, we receive a new email -> we add that to the CRM -> we send an email to the new lead.\n- Use first-person \"I\" language, like \"I'd streamline...\" for bullet points etc.\n\n\nSome facts about me for the personalization: {{ $json.aboutMe }}\n"
+            },
+            {
+              "content": "={\"jobDescription\":\"{{ $('Execute Workflow Trigger').item.json.query }}\"}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        20,
+        800
+      ],
+      "id": "aa20741c-a83a-47e5-85d9-3303291e442c",
+      "name": "OpenAI1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e980c92c-07d9-400e-b40c-a8fbdbe8bbcb",
+              "name": "aboutMe",
+              "value": "I'm an AI and automation freelancer that builds outreach systems, CRM systems, project management systems, no-code systems, and integrations.|Some notable things I've done:- End to end project management for a $1M/yr copywriting agency- Outbound acquisition system that grew a content company from $10K/mo to $92K/mo in 12 mo- Monday.com CRM and PM for a recruiting company doing >$1M/yr- Automated content generation system for an SEO agency doing >$10M/yr- ClickUp CRM build for a marketing company doing $1M/yr- I run a Make.com community that does $100,000/mo- I run a YouTube channel about automation with over 50,000 subscribers- Email outreach system for a $MM San Diego real estate brokerage that closed $150K revenue in the first three days- Email outreach systems for a $200K/mo ecommerce dog treat company",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -200,
+        800
+      ],
+      "id": "71ec355e-1a4a-4fc0-bfa1-d8078739e0f4",
+      "name": "Set Variable1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "74b2ef09-da1d-4fe0-b6ea-242f25edf5e8",
+              "name": "urlOfProposal",
+              "value": "=https://docs.google.com/document/d/{{ $json.documentId }}/edit",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1060,
+        800
+      ],
+      "id": "4290fa0b-0eb6-4d50-a4f7-5f42dd4bef58",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "content": "## 2. Generate Google Doc Proposal",
+        "height": 260,
+        "width": 1560,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        720
+      ],
+      "id": "f9d524f4-fa96-48ee-b1ca-2dec128333dc",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a helpful, intelligent Mermaid.js code writer.",
+              "role": "system"
+            },
+            {
+              "content": "=Your task is to take as input an Upwork job description and return as output a Mermaid diagram that I can visualize using a subsequent Mermaid.js tool.\n\nOutput your results in plaintext using Mermaid code formatting. Don't output anything but the Mermaid diagram code.\n\nHere's an example of what your output should look like:\n\ngraph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;\n\nRules:\n- You only output flowcharts. Nothing else. No sequence diagrams, no Gantt charts—only flowcharts.\n- Do not output any accessory formatting information, like ```mermaid.\n- Your first character should be g."
+            },
+            {
+              "content": "={{ $json.query }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        -200,
+        1080
+      ],
+      "id": "e3fabc29-6db9-498a-979c-0823c14ad796",
+      "name": "OpenAI2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d47590b5-3683-4afe-bc27-a25fb94a32d5",
+              "name": "mermaidCode",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        180,
+        1080
+      ],
+      "id": "2ed7cbaf-d3df-4f8d-a2b5-54fa9ad887e5",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "content": "## 3. Generate Mermaid Code",
+        "height": 260,
+        "width": 720,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        1020
+      ],
+      "id": "88550965-d4fe-48c7-9f49-9af6deaef8af",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        0,
+        160
+      ],
+      "id": "8fc9c5de-f175-4ab7-99df-0ec0be303744",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Instructions\n\n1. Download the four files below & create a copy of the \"Google Docs Upwork Proposal Template\".\n\n2. Import each N8N workflow into your editor (canvas -> top right -> \"Import From File\" -> save).\n\n3. Connect the top-level agent to your subflows by clicking each Tool and selecting the appropriate workflow.\n\n4. Update the \"About Me\" variables to include your own accomplishments.\n\nThat's it! You can now run the system.\n\n\n\n\nCopy the Google Docs Upwork Proposal Template [here]https://docs.google.com/document/d/1rUO3VaO2yDGO5wf0Zz72gaG7e__wjXY26PJkX8h-Y00/edit?tab=t.0.",
+        "height": 860
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        420
+      ],
+      "id": "962a9402-4772-4721-b2c4-8aaebf735bff",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## TODO\n\nMove each of these into it's own workflow, so that n8n can call them individually",
+        "height": 860,
+        "width": 200,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        420
+      ],
+      "id": "0d52fcc8-1ae6-4bcf-8428-77b602aa66b3",
+      "name": "Sticky Note5"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "backups",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-04-21T23:34:41.890Z",
+      "updatedAt": "2025-04-21T23:34:41.890Z",
+      "id": "hZKJyVB4KxO67OZ3",
+      "name": "N8N Course"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-22T17:58:13.668Z",
+  "versionId": "84685a87-53aa-4323-bcae-005259928eef"
+}
