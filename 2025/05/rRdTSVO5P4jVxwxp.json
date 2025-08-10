@@ -1,0 +1,297 @@
+{
+  "active": false,
+  "connections": {
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Update Image File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Merge Metadata and Base64 Code",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Download Image File": {
+      "main": [
+        [
+          {
+            "node": "Analyze Image Content",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Image Content": {
+      "main": [
+        [
+          {
+            "node": "Merge Metadata and Base64 Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Metadata to Base64 Code": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Metadata and Base64 Code": {
+      "main": [
+        [
+          {
+            "node": "Write Metadata to Base64 Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger: New file added to Google Drive Folder": {
+      "main": [
+        [
+          {
+            "node": "Download Image File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-09T07:39:06.778Z",
+  "id": "rRdTSVO5P4jVxwxp",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "T : Automated AI image tagging and writing the keywords into the image file",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "id": "4d45828d-1f78-42fa-92bf-f090306a94f6",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        0,
+        220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data",
+        "options": {}
+      },
+      "id": "001f7dd0-0cf2-40f0-a13f-e6399c61a76f",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "position": [
+        660,
+        120
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "chatgpt-4o-latest",
+          "cachedResultName": "CHATGPT-4O-LATEST"
+        },
+        "text": "=Deliver a comma seperated list describing the content of this image.",
+        "inputType": "base64",
+        "options": {}
+      },
+      "id": "8a94001c-8387-4af7-9fa6-1556c5ca9e77",
+      "name": "Analyze Image Content",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1.8,
+      "credentials": {
+        "openAiApi": {
+          "id": "q5LKemU3s5n59KGL",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.id }}"
+        },
+        "options": {}
+      },
+      "id": "dd607081-a416-4236-ac8d-8a0b52e4b209",
+      "name": "Download Image File",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -280,
+        100
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "X5tFnNbcGzwewwH5",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1WaIRWXcaeNViKmpW5IyQ3YGARWYdMg47",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1WaIRWXcaeNViKmpW5IyQ3YGARWYdMg47",
+          "cachedResultName": "EXIF"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "id": "904a9e8c-99f3-4d10-94e7-89bf4bf36e04",
+      "name": "Trigger: New file added to Google Drive Folder",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "position": [
+        -480,
+        100
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "X5tFnNbcGzwewwH5",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const tags = items[0].json.content.split(', ');\n\nconst xmpData = `<?xpacket begin=\"﻿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"XMP Core 5.1.2\">\n    <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n        <rdf:Description rdf:about=\"\"\n            xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n            xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"\n            xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\">\n            <dc:creator></dc:creator>\n            <dc:subject>\n                <rdf:Bag>\n                    ${tags.map(tag => `<rdf:li>${tag}</rdf:li>`).join('\\n                    ')}\n                </rdf:Bag>\n            </dc:subject>\n            <xmp:CreateDate>${new Date().toISOString()}</xmp:CreateDate>\n        </rdf:Description>\n    </rdf:RDF>\n</x:xmpmeta>\n<?xpacket end=\"w\"?>`;\n\nconst xmpHeader = Buffer.from([\n    0xFF, 0xE1,\n    0x00, 0x00,\n    0x68, 0x74, 0x74, 0x70, 0x3A, 0x2F, 0x2F, 0x6E, 0x73, 0x2E,\n    0x61, 0x64, 0x6F, 0x62, 0x65, 0x2E, 0x63, 0x6F, 0x6D, 0x2F,\n    0x78, 0x61, 0x70, 0x2F, 0x31, 0x2E, 0x30, 0x2F, 0x00\n]);\n\nconst xmpBuffer = Buffer.from(xmpData, 'utf8');\nconst imageBuffer = Buffer.from(items[0].json.data, 'base64');\nconst length = xmpHeader.length + xmpBuffer.length - 2;\nxmpHeader[2] = (length >> 8) & 0xFF;\nxmpHeader[3] = length & 0xFF;\n\nconst newImageData = Buffer.concat([\n    imageBuffer.slice(0, 2),\n    xmpHeader,\n    xmpBuffer,\n    imageBuffer.slice(2)\n]);\n\nitems[0].json.data = newImageData.toString('base64');\n\nreturn items;"
+      },
+      "id": "7cec8f24-ecea-4be8-a4d9-0b96049a07f7",
+      "name": "Write Metadata to Base64 Code",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        460,
+        120
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Download Image File').item.json.id }}"
+        },
+        "changeFileContent": true,
+        "newUpdatedFileName": "={{ $('Download Image File').item.json.name }}",
+        "options": {}
+      },
+      "id": "84ec31d4-53be-4f41-aa13-7e9d8602aa66",
+      "name": "Update Image File",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        860,
+        120
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "X5tFnNbcGzwewwH5",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Welcome to my Automated Image Metadata Tagging Workflow!\n\nThis workflow automatically analyzes the image content with the help of AI and writes it directly back into the image file as keywords.\n\n## This workflow has the following sequence:\n\n1. Google Drive trigger (scan for new files added in a specific folder)\n2. Download the added image file\n3. Analyse the content of the image and extract the file as Base64 code\n4. Merge Metadata and Base64 Code\n5. Code Node to write the Keywords into the Metadata (dc:subject)\n6. Convert to file and update the original file in the Google Drive folder\n\n## The following accesses are required for the workflow:\n- Google Drive: [Documentation](https://docs.n8n.io/integrations/builtin/credentials/google)\n- AI API access (e.g. via OpenAI, Anthropic, Google or Ollama)\n\nYou can contact me via LinkedIn, if you have any questions: https://www.linkedin.com/in/friedemann-schuetz",
+        "height": 680,
+        "width": 660
+      },
+      "id": "c74a3c24-c8e0-48b9-980c-a2073ecfed33",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -800,
+        280
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "d85c7ba3-697f-4fd1-9ad1-95b32fa7d89d",
+      "name": "Merge Metadata and Base64 Code",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        260,
+        120
+      ],
+      "typeVersion": 3
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-09T07:40:26.914Z",
+  "versionId": "9b0217fa-9c56-415f-816e-d7420d638aad"
+}
