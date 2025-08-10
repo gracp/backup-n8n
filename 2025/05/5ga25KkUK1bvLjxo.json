@@ -1,0 +1,1580 @@
+{
+  "active": false,
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Check Data on Database Is Exist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Params": {
+      "main": [
+        [
+          {
+            "node": "Rapid Api params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Data is Exist": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "insert data on db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Instagram params": {
+      "main": [
+        [
+          {
+            "node": "Telegram Params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rapid Api params": {
+      "main": [
+        [
+          {
+            "node": "get top trends on instagram #isometric",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get top trends on instagram #blender3d",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replicate params": {
+      "main": [
+        [
+          {
+            "node": "Instagram params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Replicate params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "insert data on db": {
+      "main": [
+        [
+          {
+            "node": "Analyze Image and give the content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check status of post ": {
+      "main": [
+        [
+          {
+            "node": "If media status is finished1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate image on flux": {
+      "main": [
+        [
+          {
+            "node": "Prepare data on Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "merge the array content": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "filter the image content": {
+      "main": [
+        [
+          {
+            "node": "merge the array content",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Prepare data on Instagram": {
+      "main": [
+        [
+          {
+            "node": "Check Status Of Media Before Uploaded",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publish Media on Instagram": {
+      "main": [
+        [
+          {
+            "node": "Check status of post ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "filter the image content-2": {
+      "main": [
+        [
+          {
+            "node": "merge the array content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If media status is finished": {
+      "main": [
+        [
+          {
+            "node": "Publish Media on Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If media status is finished1": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Data on Database Is Exist": {
+      "main": [
+        [
+          {
+            "node": "If Data is Exist",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "send error message to telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Image and give the content": {
+      "main": [
+        [
+          {
+            "node": "Analyze Content And Generate Instagram Caption",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Status Of Media Before Uploaded": {
+      "main": [
+        [
+          {
+            "node": "If media status is finished",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get top trends on instagram #isometric": {
+      "main": [
+        [
+          {
+            "node": "filter the image content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get top trends on instagram #blender3d": {
+      "main": [
+        [
+          {
+            "node": "filter the image content-2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Content And Generate Instagram Caption": {
+      "main": [
+        [
+          {
+            "node": "Generate image on flux",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FunctionItem": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "FunctionItem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-29T09:28:33.940Z",
+  "id": "5ga25KkUK1bvLjxo",
+  "isArchived": false,
+  "meta": null,
+  "name": "Automated Instagram Content Creation from Trending Posts",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "0304efee-33b2-499e-bad1-9238c1fc2999",
+              "operator": {
+                "name": "filter.operator.equals",
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.status_code }}",
+              "rightValue": "FINISHED"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4d9c5ec6-5f29-48e4-a7db-ddc7bfb1ae0c",
+      "name": "If media status is finished",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        4600,
+        1200
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "0304efee-33b2-499e-bad1-9238c1fc2999",
+              "operator": {
+                "name": "filter.operator.equals",
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.status_code }}",
+              "rightValue": "PUBLISHED"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "51c16224-819f-488f-814e-edea37bfc719",
+      "name": "If media status is finished1",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        5180,
+        1200
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Params').item.json.telegram_chat_id }}",
+        "text": "Video upload edilmeden önce bir problem oldu",
+        "additionalFields": {}
+      },
+      "id": "88849805-e1cb-45c4-9a3c-085a43facd0d",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        4760,
+        1380
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "dae413b3-180b-441f-b160-42948e532e3f"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Params').item.json.telegram_chat_id }}",
+        "text": "Instagram Content is shared",
+        "additionalFields": {}
+      },
+      "id": "8ce555a4-f79b-4585-9368-b6f8abae190d",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        5340,
+        1040
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "3914d35b-fe96-40bf-90e9-112b5025c417"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Params').item.json.telegram_chat_id }}",
+        "text": "There was a problem when execution a upload content to instagram",
+        "additionalFields": {}
+      },
+      "id": "092d6c48-57b4-42c2-9b7d-f07d3b24adda",
+      "name": "Telegram2",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        5340,
+        1380
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "30537a4a-c2fb-4da0-8445-ee7ebb91c7fa"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1aea8244-1b25-400e-86ed-339b566a9a4c",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        2180,
+        1160
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "5 13,19 * * *"
+            }
+          ]
+        }
+      },
+      "id": "1b29cb2b-87cb-458b-ac3a-f9670376ddf8",
+      "name": "Schedule Trigger1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        100,
+        1240
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d18cdca7-d301-4c70-a4d0-8d6e7ecfc2d1",
+              "name": "telegram_chat_id",
+              "type": "string",
+              "value": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "636cebae-3f48-41a9-9956-e126377602ed",
+      "name": "Telegram Params",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        860,
+        1240
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1e380c14-e908-4eeb-90e0-957a422829d0",
+              "name": "instagram_business_account_id",
+              "type": "string",
+              "value": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "681205aa-15bc-495b-a926-c8218774d850",
+      "name": "Instagram params",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        620,
+        1240
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "content": "## All Credentials You Need\n** Instagram Business Account Id\n** Telegram Chat Id\n** Rapid Api Key\n** Replicate Token",
+        "height": 600,
+        "width": 1000,
+        "color": 4
+      },
+      "id": "2ea4d4ab-695b-4fcd-8c02-6c14bd3e26fe",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        320,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "48a33ec7-2b4f-496a-ad77-e4d5f1907ee4",
+              "name": "x-rapid-api-key",
+              "type": "string",
+              "value": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c0e1a172-ff07-4cb3-bee9-e83a9765ce20",
+      "name": "Rapid Api params",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1100,
+        1240
+      ],
+      "notesInFlow": false,
+      "typeVersion": 3.4,
+      "notes": "test"
+    },
+    {
+      "parameters": {
+        "jsCode": "const filteredData = $input.first().json.data.items.filter(item=> !item.is_video)\nreturn filteredData.map((item)=>{\n return {\n id: item.id,\n prompt: item.caption.text,\n content_code: item.code,\n thumbnail_url: item.thumbnail_url,\n tag: $input.first().json.data.additional_data.name\n }\n}) \n\n"
+      },
+      "id": "82a2a3b9-b9ce-432a-b118-9cb2a8078a45",
+      "name": "filter the image content",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1700,
+        1320
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "url": "https://instagram-scraper-api2.p.rapidapi.com/v1/hashtag",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "hashtag",
+              "value": "blender3d"
+            },
+            {
+              "name": "feed_type",
+              "value": "top"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "instagram-scraper-api2.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "={{ $json['x-rapid-api-key'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "09475800-2881-4af3-8018-d61daddb26e4",
+      "name": "get top trends on instagram #blender3d",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1460,
+        1120
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "url": "https://instagram-scraper-api2.p.rapidapi.com/v1/hashtag",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "hashtag",
+              "value": "isometric"
+            },
+            {
+              "name": "feed_type",
+              "value": "top"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "instagram-scraper-api2.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "={{ $json['x-rapid-api-key'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bb3ffec6-d64b-4c00-8afb-ba40f323ad63",
+      "name": "get top trends on instagram #isometric",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1460,
+        1320
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {},
+      "id": "a92fd2ab-f760-4a28-b391-84f17ea8f708",
+      "name": "merge the array content",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        1900,
+        1220
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "content": "## Schedule Your Time To Post\n",
+        "height": 600,
+        "width": 280,
+        "color": 3
+      },
+      "id": "0512c564-962b-4439-a324-470e36b38bcc",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Guide \n** [Guide](https://docs.matillion.com/metl/docs/6957316//) of getting of Instagram Business Account Id ",
+        "height": 300,
+        "width": 180,
+        "color": 5
+      },
+      "id": "1a805ac5-af86-43fa-b027-035fdad9c2d8",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        580,
+        1100
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Guide \n** [Guide](https://rapidapi.com/i-yqerddkq0t/api/telegram92/tutorials/how-to-get-the-id-of-a-telegram-channel,-chat,-user-or-bot%3F) of Getting of Telegram Chat Id ",
+        "height": 300,
+        "width": 180,
+        "color": 5
+      },
+      "id": "44cac341-85de-4e39-972e-939a8428578f",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        820,
+        1100
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Guide \n** [Guide](https://docs.rapidapi.com/docs/keys-and-key-rotation) of Getting of Rapid Api Key ",
+        "height": 300,
+        "width": 180,
+        "color": 5
+      },
+      "id": "370f3de0-695f-4d49-adc1-c5b3aa143e69",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1060,
+        1100
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Warning\n**Don't forgot the create bot and send a message to bot first",
+        "height": 120,
+        "width": 180,
+        "color": 7
+      },
+      "id": "1e44dead-5628-4c78-9e4d-4a367d23bc45",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        820,
+        1420
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Getting Top Trend Posts On Instagram\n** Change the topic you want to get on http request",
+        "height": 600,
+        "width": 660
+      },
+      "id": "dc4affaf-088e-4ad1-b69a-8d7a3b0ac872",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1360,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public",
+          "cachedResultName": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "top_trends",
+          "cachedResultName": "top_trends"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "code",
+              "value": "={{$json.content_code}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "acd39337-7833-4e37-9fb5-cb098a6b66d6",
+      "name": "Check Data on Database Is Exist",
+      "type": "n8n-nodes-base.postgres",
+      "position": [
+        2420,
+        1160
+      ],
+      "typeVersion": 2.5,
+      "alwaysOutputData": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "9dc20983-ae4d-40db-b969-7d43fa8b0c3e",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "leftValue": "={{ !$json.isEmpty() }}",
+              "rightValue": "we"
+            },
+            {
+              "id": "0e1b9264-be56-4d0c-a83e-d9ca0b05b265",
+              "operator": {
+                "name": "filter.operator.equals",
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "",
+              "rightValue": ""
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "564d4551-bec2-477d-9d14-2a9cd213f2f6",
+      "name": "If Data is Exist",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        2640,
+        1180
+      ],
+      "executeOnce": false,
+      "typeVersion": 2.2,
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "## Looping Data And Checking For Is Exist On Database\n**We are checking until find a data we did not insert because we don't want to create content about in same content",
+        "height": 600,
+        "width": 1060
+      },
+      "id": "bbf59af6-3c87-4a2e-952a-45ac1e46ca60",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2060,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Params').item.json.telegram_chat_id}}",
+        "text": "There was a problem execution a postgresql content",
+        "additionalFields": {}
+      },
+      "id": "a077a77a-0f6d-412e-9dfd-2b8e307761c0",
+      "name": "send error message to telegram",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        2180,
+        1380
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "00077a78-b944-4410-af33-34ee481dac69"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "top_trends",
+          "cachedResultName": "top_trends"
+        },
+        "columns": {
+          "value": {
+            "tag": "={{$('Loop Over Items').item.json.tag}}",
+            "code": "={{$('Loop Over Items').item.json.content_code}}",
+            "prompt": "={{$('Loop Over Items').item.json.prompt}}",
+            "isposted": false,
+            "thumbnail_url": "={{$('Loop Over Items').item.json.thumbnail_url}}"
+          },
+          "schema": [
+            {
+              "id": "id",
+              "type": "number",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "id",
+              "defaultMatch": true,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prompt",
+              "type": "string",
+              "display": true,
+              "required": true,
+              "displayName": "prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "isposted",
+              "type": "boolean",
+              "display": true,
+              "required": false,
+              "displayName": "isposted",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "createdat",
+              "type": "dateTime",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "createdat",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updatedat",
+              "type": "dateTime",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "updatedat",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "deletedat",
+              "type": "dateTime",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "deletedat",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "code",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "code",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tag",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "tag",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "thumbnail_url",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "thumbnail_url",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "id"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "9f870fb6-0399-45a4-bf77-b8ab1d68466a",
+      "name": "insert data on db",
+      "type": "n8n-nodes-base.postgres",
+      "position": [
+        2920,
+        1180
+      ],
+      "typeVersion": 2.5
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "Create a clear and concise description of the object in the image, focusing on its physical and general features. Avoid detailed environmental aspects like background, lighting, or colors. Describe the shape, texture, size, and any unique characteristics of the object. Mention any notable features that make the object stand out, such as its surface details, materials, and design. The description should be focused on the object itself, not its surroundings.\n\nFor example, describe the following image:\n",
+        "imageUrls": "={{ $('Loop Over Items').item.json.thumbnail_url }}",
+        "options": {}
+      },
+      "id": "b63e5ecc-f16f-480a-8fb5-609e0fe41ff5",
+      "name": "Analyze Image and give the content",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        3260,
+        1180
+      ],
+      "typeVersion": 1.8
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=\nSummarize the following content description into a short, engaging Instagram caption under 150 words. The caption should focus on the content of the image, not the app. Keep it appealing to social media users, and highlight the visual details of the image. Include hashtags relevant to 3D modeling and design, such as #Blender3D, #3DArt, #DigitalArt, #3DModeling, and #ArtCommunity. Ensure the tone is friendly and inviting.\n\n\nContent description to summarize:\n{{ $json.content }}\n\nMake sure to craft the caption around the content's features, such as the color contrast, reflective surface, and artistic nature of the image.\n\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "98e1f05c-123d-4458-afea-1a10d155d1d1",
+      "name": "Analyze Content And Generate Instagram Caption",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        3460,
+        1180
+      ],
+      "typeVersion": 1.8
+    },
+    {
+      "parameters": {
+        "content": "## Analyze Post Content\n** We are analyzing the image\n** We are generating a instagram caption by content\n** Then we are generating the image",
+        "height": 600,
+        "width": 860,
+        "color": 4
+      },
+      "id": "147a9b57-530b-4039-9ac0-ee110490c871",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3160,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v20.0",
+        "node": "={{ $('Instagram params').item.json.instagram_business_account_id }}",
+        "edge": "media",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "image_url",
+                "value": "={{ $json.output[0] }}"
+              },
+              {
+                "name": "caption",
+                "value": "={{ $('Analyze Content And Generate Instagram Caption').item.json.message.content }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "1c1315b7-fcf4-450e-bdee-1d96bcd4708c",
+      "name": "Prepare data on Instagram",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        4160,
+        1200
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v20.0",
+        "node": "={{ $json.id }}",
+        "options": {
+          "fields": {
+            "field": [
+              {
+                "name": "id"
+              },
+              {
+                "name": "status"
+              },
+              {
+                "name": "status_code"
+              }
+            ]
+          }
+        }
+      },
+      "id": "086e8754-f080-4679-a1b4-f795d56ac60d",
+      "name": "Check Status Of Media Before Uploaded",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        4380,
+        1200
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v20.0",
+        "node": "={{ $('Instagram params').item.json.instagram_business_account_id }}",
+        "edge": "media_publish",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "creation_id",
+                "value": "={{ $json.id }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "6356566b-37d4-49a5-8524-86b450f5878b",
+      "name": "Publish Media on Instagram",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        4780,
+        1040
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v20.0",
+        "node": "={{ $('Check Status Of Media Before Uploaded').item.json.id }}",
+        "options": {
+          "fields": {
+            "field": [
+              {
+                "name": "id"
+              },
+              {
+                "name": "status"
+              },
+              {
+                "name": "status_code"
+              }
+            ]
+          }
+        }
+      },
+      "id": "5fad3c34-3882-4ead-8f33-84144a9ec806",
+      "name": "Check status of post ",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        4980,
+        1200
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Publish On Instagram And Send Message When Published via Telegram\n",
+        "height": 600,
+        "width": 1580,
+        "color": 5
+      },
+      "id": "3330b495-730e-416a-a8cb-5bc56d7457ba",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4060,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## For More About Api\n** [Facebook Scraper Api Guide](https://rapidapi.com/social-api1-instagram/api/instagram-scraper-api2/playground/apiendpoint_a45552b2-9850-4da9-b5cb-bbdd3ac2199d)",
+        "height": 500,
+        "width": 260,
+        "color": 5
+      },
+      "id": "616613e4-daf1-43ab-be63-6adac56ca7b2",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1380,
+        1040
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "const filteredData = $input.first().json.data.items.filter(item=> !item.is_video)\nreturn filteredData.map((item)=>{\n return {\n id: item.id,\n prompt: item.caption.text,\n content_code: item.code,\n thumbnail_url: item.thumbnail_url,\n tag: $input.first().json.data.additional_data.name\n }\n}) \n\n"
+      },
+      "id": "e5e267be-0e2f-41f2-9240-7e249819d27c",
+      "name": "filter the image content-2",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1700,
+        1120
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "content": "## Guide \n** [Guide](https://replicate.com) of getting of Replicate Token ",
+        "height": 300,
+        "width": 180,
+        "color": 5
+      },
+      "id": "fe41d8ff-8adb-4cce-9e75-04a957317c2b",
+      "name": "Sticky Note11",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        360,
+        1100
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1e380c14-e908-4eeb-90e0-957a422829d0",
+              "name": "replicate_token",
+              "type": "string",
+              "value": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7a978b2a-3a82-4627-8854-25502cc54b05",
+      "name": "Replicate params",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        400,
+        1240
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Replicate params').item.json.replicate_token}}"
+            },
+            {
+              "name": "Prefer",
+              "value": "wait"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "=json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n \"input\": {\n \"prompt\": \"A highly detailed 3D isometric model of {{$('Analyze Image and give the content').item.json.content .replace(/\\\\n/g, ' ') \n.replace(/\\\\t/g, ' ') \n.replace(/\\s+/g, ' ')\n.trim(); }} rendered in a stylized miniature toy aesthetic. Materials: Matte plastic/painted metal/weathered stone texture with no self-shadowing. Lighting: - Completely shadowless rendering - Ultra bright and perfectly even illumination from all angles - Pure ambient lighting without directional shadows - Flat, consistent lighting across all surfaces - No ambient occlusion. Style specifications: - Clean, defined edges and surfaces - Slightly exaggerated proportions - Miniature/toy-like scale - Subtle wear and texturing - Rich color palette with muted tones - Isometric 3/4 view angle - Crisp details and micro-elements. Technical details: - 4K resolution - PBR materials without shadows - No depth of field - High-quality anti-aliasing - Perfect uniform lighting. Environment: Pure white background with zero shadows or gradients. Post-processing: High key lighting, maximum brightness, shadow removal.\",\n \"output_format\": \"jpg\",\n \"output_quality\": 100,\n \"go_fast\":false\n }\n}\n",
+        "options": {}
+      },
+      "id": "c21633cd-62aa-4d50-a8c6-b0935992b49a",
+      "name": "Generate image on flux",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        3860,
+        1200
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "content": "## For top_trends Table\n```\nCREATE TABLE top_trends (\n id SERIAL PRIMARY KEY,\n isposted BOOLEAN DEFAULT false,\n createdat TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,\n updatedat TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,\n deletedat TIMESTAMP WITHOUT TIME ZONE,\n prompt TEXT NOT NULL,\n thumbnail_url TEXT,\n code TEXT,\n tag TEXT\n);\n```",
+        "height": 320,
+        "width": 1060,
+        "color": 4
+      },
+      "id": "2220e788-5dd2-4a9a-bc8d-0781468e179f",
+      "name": "Sticky Note12",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2060,
+        600
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Warning\n** Don't forgot the create top_trends table",
+        "height": 120,
+        "width": 160,
+        "color": 3
+      },
+      "id": "0fa28adf-9957-4a62-8b29-4d64787dd7ee",
+      "name": "Sticky Note13",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2520,
+        820
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n## Automated Instagram Content Creation from Trending Posts\n\nThis workflow automates the process of discovering and recreating trending content on Instagram:\n\n1. Content Discovery:\n - Scrapes top trending posts from specific hashtags (#blender3d, #isometric)\n - Filters for image-only content (excludes videos)\n - Checks database to avoid duplicate content\n\n2. AI-Powered Content Generation:\n - Analyzes trending images using GPT-4 Vision\n - Generates detailed descriptions of visual elements\n - Creates engaging Instagram captions with relevant hashtags\n - Uses Flux AI to generate similar but unique images\n\n3. Publishing & Monitoring:\n - Automatically posts content to Instagram Business Account\n - Monitors post status and publishing process\n - Sends status updates via Telegram\n\nPerfect for content creators and businesses looking to maintain an active Instagram presence with AI-generated content inspired by current trends. The workflow runs on schedule and handles everything from content discovery to publication automatically.\n\nNote: Requires Instagram Business Account, Telegram Bot, OpenAI, and Replicate API credentials.",
+        "height": 840,
+        "width": 620
+      },
+      "id": "93702639-cf1d-477b-9f16-2acdbf27024c",
+      "name": "Sticky Note14",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "##Warning\n** Dont forgot the subscribe [Instagram Scraper Api](https://rapidapi.com/social-api1-instagram/api/instagram-scraper-api2/playground/apiendpoint_a45552b2-9850-4da9-b5cb-bbdd3ac2199d)",
+        "height": 120,
+        "width": 180,
+        "color": 7
+      },
+      "id": "5996c55c-16cf-4936-ab0c-1449fc961c35",
+      "name": "Sticky Note15",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1060,
+        1420
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Warning\n** You can check the [rate limit](https://rapidapi.com/social-api1-instagram/api/instagram-scraper-api2) of the Instagram Scraper Api on Rapid Api\n** Free version is monthly 500 request\n",
+        "height": 180,
+        "width": 180
+      },
+      "id": "a393cb06-0231-4fec-b5e3-268b12792f2a",
+      "name": "Sticky Note16",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1060,
+        1580
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        60,
+        2320
+      ],
+      "typeVersion": 1,
+      "id": "9d7a743a-c4a3-4e75-9557-529988fc0a31"
+    },
+    {
+      "parameters": {
+        "functionCode": "// hashtag list\nconst Hashtags = [\n \"#techtwitter\",\n \"#n8n\"\n];\n\n// random output function\nconst randomHashtag = Hashtags[Math.floor(Math.random() * Hashtags.length)];\nitem.hashtag = randomHashtag;\nreturn item;"
+      },
+      "name": "FunctionItem",
+      "type": "n8n-nodes-base.functionItem",
+      "position": [
+        260,
+        2320
+      ],
+      "typeVersion": 1,
+      "id": "98c2b6fd-eb23-4fa7-8923-005348948854"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-001/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n \"prompt\": \"Generate a tweet, with under 100 characters, about ani want a website for my brand which is a single product ecommerce brand selling a fishnet dishcloth called Scrubbi Mesh.\n\nI will start by creating all the page layouts in figma.  how many pages and which pages do i need to created including the hashtag {{$node[\"FunctionItem\"].json[\"hashtag\"]}}:\",\n \"temperature\": 0.7,\n \"max_tokens\": 64,\n \"top_p\": 1,\n \"frequency_penalty\": 0,\n \"presence_penalty\": 0\n}"
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        460,
+        2320
+      ],
+      "typeVersion": 1,
+      "id": "04b63abf-db44-4b2f-94c5-a4caa9111b11",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "RpV29bhiYGu2uHjO",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "append",
+        "application": "appOaG8kEA8FAABOr",
+        "table": "main",
+        "options": {}
+      },
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "position": [
+        860,
+        2320
+      ],
+      "typeVersion": 1,
+      "id": "4b93166f-32bf-4a9b-83e8-d50378d253fe",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "k7gB6BEXfqkHALbX",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Hashtag",
+              "value": "={{$node[\"FunctionItem\"].json[\"hashtag\"]}}"
+            },
+            {
+              "name": "Content",
+              "value": "={{$node[\"HTTP Request\"].json[\"choices\"][0][\"text\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        660,
+        2320
+      ],
+      "typeVersion": 1,
+      "id": "91c948c1-1cc1-4db2-9844-869f8071e3cc"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate a tweet, with under 100 characters\n\nAbout {solving a pain point of the target audience for my brand Scrubbi Mesh, which is the world's best fishnest dishcloth}\n\nincluding the hashtag {{$node[\"FunctionItem\"].json[\"hashtag\"]}}",
+        "hasOutputParser": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        380,
+        2500
+      ],
+      "id": "325483d5-e208-4d92-9901-3d6973696284",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {
+          "temperature": 0.7,
+          "topP": 1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        340,
+        2700
+      ],
+      "id": "13320e54-d935-4325-aa51-79eeb784bdfe",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        520,
+        2720
+      ],
+      "id": "99a243b9-55ea-4eff-9de4-2a909a70e790",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-29T10:59:14.776Z",
+  "versionId": "77a23ff4-858a-4ba4-82da-0a5ab74af40a"
+}
