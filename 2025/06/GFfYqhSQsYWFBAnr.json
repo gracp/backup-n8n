@@ -1,0 +1,22 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-06-05T05:45:56.336Z",
+  "id": "GFfYqhSQsYWFBAnr",
+  "isArchived": false,
+  "meta": null,
+  "name": "Chat Playground",
+  "nodes": [],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-05T05:45:56.336Z",
+  "versionId": "8d43ef39-03b6-49cf-9745-a9072adf6f82"
+}
