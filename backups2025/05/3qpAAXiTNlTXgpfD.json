@@ -1,0 +1,673 @@
+{
+  "active": false,
+  "connections": {
+    "Post Summarization": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Input": {
+      "main": [
+        [
+          {
+            "node": "Filter Posts By Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge 3 Inputs": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Output The Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Posts By Content": {
+      "main": [
+        [
+          {
+            "node": "Post Summarization",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Key Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge Input",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Basic LLM Chain2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge 3 Inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge 3 Inputs",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Post Summarization",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain2": {
+      "main": [
+        [
+          {
+            "node": "Merge Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Select Key Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Select Key Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-11T08:17:22.431Z",
+  "id": "3qpAAXiTNlTXgpfD",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "6f5a2e26-d90b-4faf-92b2-8cb1471bcc99",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        432
+      ],
+      "id": "21d43fde-d2e7-40ce-b225-59bdad7fc63b",
+      "name": "Webhook",
+      "webhookId": "6f5a2e26-d90b-4faf-92b2-8cb1471bcc99"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [
+        1824,
+        624
+      ],
+      "id": "e5339ff7-f79f-4742-894e-4448f827bbb2",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "options": {
+          "summarizationMethodAndPrompts": {
+            "values": {
+              "combineMapPrompt": "Write a concise summary of the following, also clearly include the business problem stated by the author:\n\n\n\"{text}\"\n\n\nCONCISE SUMMARY: ",
+              "prompt": "Write a concise summary of the following, also clearly include the business problem stated by the author:\n\n\n\"{text}\"\n\n\nCONCISE SUMMARY: "
+            }
+          }
+        }
+      },
+      "id": "6981ed05-5423-4cdd-9a88-4a05e8a0664e",
+      "name": "Post Summarization",
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "position": [
+        704,
+        288
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "6b0db36c-7429-4b8c-b6fc-2a3fa3b6ddcb",
+      "name": "Merge Input",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        -48,
+        592
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1zWnA6ni5T3tBqjhzItQeIfZMu7J_srNU3rQLoV7gVuA"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zWnA6ni5T3tBqjhzItQeIfZMu7J_srNU3rQLoV7gVuA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "subreddit_subscribers",
+              "displayName": "subreddit_subscribers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "upvotes",
+              "displayName": "upvotes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "postcontent",
+              "displayName": "postcontent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "business_opportunity",
+              "displayName": "business_opportunity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_flair_text",
+              "displayName": "link_flair_text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "d92d0c34-f7b1-40ff-9487-13eb4ad2ceaf",
+      "name": "Output The Results",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1824,
+        432
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "W2Pbwr8I4vflo7RJ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "406c6adb-ac84-44ef-87c9-5bd330f47f27",
+      "name": "Merge 3 Inputs",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        1488,
+        432
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "d5d38c01-3a88-4767-b488-d9c04145bb8f",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "yes"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "41f61323-9ab2-4c03-a3a9-045d922a9fb7",
+      "name": "Filter Posts By Content",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        224,
+        592
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e5082ecc-3add-474e-bdb5-b8ad64729930",
+              "name": "upvotes",
+              "type": "string",
+              "value": "={{ $json.ups }}"
+            },
+            {
+              "id": "a92b5859-fbcc-40c2-95e0-452b12530d98",
+              "name": "subreddit_subscribers",
+              "type": "number",
+              "value": "={{ $json.subreddit_subscribers }}"
+            },
+            {
+              "id": "f6a72074-7547-4396-a9a4-781a7fa8ea71",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "a846e21c-6cff-4521-9e0c-a32fa1305376",
+              "name": "postcontent",
+              "type": "string",
+              "value": "={{ $json.selftext }}"
+            },
+            {
+              "id": "b8045389-684d-4872-9e32-9a6b5511eb2b",
+              "name": "url",
+              "type": "string",
+              "value": "={{ $json.url }}"
+            },
+            {
+              "id": "f182fedc-1b09-40fe-aeb5-2473263da442",
+              "name": "date",
+              "type": "string",
+              "value": "={{ DateTime.fromSeconds($json.created).toISO() }}"
+            },
+            {
+              "id": "bb329a9b-2297-48e6-affc-7d7ade4cfb2d",
+              "name": "link_flair_text",
+              "value": "={{ $json.link_flair_text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f2c1c3fb-56fa-447a-82b2-ffa402f0153b",
+      "name": "Select Key Fields",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -704,
+        624
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "content": "# Transformation Step\n## Analyze using LLM (AI)\n## Filter for business opportunities",
+        "height": 660,
+        "width": 820,
+        "color": 4
+      },
+      "id": "14aded1e-9911-489f-bab6-4f1eaa6138ed",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -464,
+        192
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "#Transformation 2nd Step + Load to Gsheet\n## Insight Generation \n## Generates executive summaries of key opportunities\n## Submit findings in Google Sheets",
+        "height": 760,
+        "width": 1460,
+        "color": 6
+      },
+      "id": "024a1da0-38fe-403b-bfd9-1a842b251f60",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        480,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7038812d-f325-4196-89b6-3623d81dec7b",
+              "name": "summary",
+              "type": "string",
+              "value": "={{ $json.response.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b4d6d9b1-b45d-4a52-ad41-26c2d35c87e1",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1152,
+        288
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1f34c3f3-7be7-474c-9026-7058807a7b3d",
+              "name": "date",
+              "type": "string",
+              "value": "={{ $json.date }}"
+            },
+            {
+              "id": "0e0e5227-e37b-43fc-8a88-2bb76631108d",
+              "name": "subreddit_subscribers",
+              "type": "number",
+              "value": "={{ $json.subreddit_subscribers }}"
+            },
+            {
+              "id": "68e2ca82-6b1d-42ec-acc7-b784e9ed61b5",
+              "name": "url",
+              "type": "string",
+              "value": "={{ $json.url }}"
+            },
+            {
+              "id": "946800a2-ec8b-4f99-a4db-9248bf305747",
+              "name": "upvotes",
+              "type": "string",
+              "value": "={{ $json.upvotes }}"
+            },
+            {
+              "id": "eb38735a-a1cd-4ccf-8fc1-3f7644adb58e",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "da86d4d3-db84-44e3-a684-38aff2fd5b77",
+              "name": "postcontent",
+              "type": "string",
+              "value": "={{ $json.postcontent }}"
+            },
+            {
+              "id": "b67148e1-67a5-4b10-be6c-c819ff910be0",
+              "name": "business_opportunity",
+              "type": "string",
+              "value": "={{ $json.text }}"
+            },
+            {
+              "id": "11634a95-c3ba-4936-909b-9d977368e2cd",
+              "name": "link_flair_text",
+              "value": "={{ $json.link_flair_text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "63a1a6d7-d442-4c0f-a674-a130e341b4b2",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        960,
+        560
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        560
+      ],
+      "id": "9e5ef1a6-6658-4060-8390-08614435a11b",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "iW167en2VTC8MiSe",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        704,
+        512
+      ],
+      "id": "b03ec525-25a8-46dc-999c-095156cb4d23",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "iW167en2VTC8MiSe",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Decide whether this reddit post is describing a business-related problem or a need for a solution.",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "The post should mention a specific challenge or requirement that a business is trying to address. Is this post about a business problem or need for a solution ? Output only yes or no"
+            },
+            {
+              "type": "HumanMessagePromptTemplate",
+              "message": "=Reddit post:  {{ $json.postcontent }}"
+            }
+          ]
+        }
+      },
+      "id": "e38a591d-32c9-4059-af31-31f9da39b730",
+      "name": "Basic LLM Chain2",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        -416,
+        368
+      ],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -976,
+        624
+      ],
+      "id": "97ee5b86-d4bd-41ef-9df5-bc2717ab3a1c",
+      "name": "When chat message received",
+      "webhookId": "aeaeb9bb-ac12-41db-b001-4c328dd1db53"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "backups",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-09T05:37:10.148Z",
+  "versionId": "76d991cb-5315-4dbc-978a-0dd24f127520"
+}
