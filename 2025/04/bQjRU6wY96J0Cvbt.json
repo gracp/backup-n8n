@@ -1,0 +1,241 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Application Copy": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Google Doc Proposal": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Mermaid.js": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-21T23:30:38.757Z",
+  "id": "bQjRU6wY96J0Cvbt",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "UPWORK_00. Upwork AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nEnter the Upwork Job Details and Ill make the application!",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -220,
+        0
+      ],
+      "id": "bb84d720-b151-4213-8ead-8434012f6233",
+      "name": "When chat message received",
+      "webhookId": "89921f10-c333-4854-977f-57d621cb6350"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You're a helpful, intelligent Upwork assistant. Your task is to receive an Upwork job description and then use it to generate assets, like Mermaid diagrams, Google Docs, and Upwork application bodies. \n\nWhen you receive an Upwork job description, you *must* generate a Mermaid diagram, a Google Doc proposal, and an Upwork application. You must then replace the $$$ with the Google Doc proposal link.\n\nOutput the Google Doc proposal link in plaintext, like link: https://www..."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        180,
+        -60
+      ],
+      "id": "c0ff3bc8-891d-4c06-9cfa-07945d875d17",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        100,
+        160
+      ],
+      "id": "bc9d3057-6313-4340-a0b3-5ef70a4d5e79",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "name": "generate_upwork_application_copy",
+        "description": "Call this tool to generate Upwork application copy. The input will be an Upwork job description, and the output will be the Upwork application copy string from the tool.",
+        "workflowId": {
+          "__rl": true,
+          "value": "1DXBStjzG7KXCAys",
+          "mode": "list",
+          "cachedResultName": "UPWORK_01. Generate Application Copy"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        260,
+        160
+      ],
+      "id": "5fa90892-7e66-4174-8bb8-e11e02d09cea",
+      "name": "Generate Application Copy"
+    },
+    {
+      "parameters": {
+        "name": "generate_google_doc_proposal",
+        "description": "Call this tool to generate a Google Doc proposal for an Upwork job. The input should be a string of an Upwork job post, and the output will be a proposal URL that you can use to fill in templates.",
+        "workflowId": {
+          "__rl": true,
+          "value": "RZjy3ub4ow30kOx5",
+          "mode": "list",
+          "cachedResultName": "UPWORK_02. Generate Google Doc Proposal"
+        },
+        "responsePropertyName": "urlOfProposal"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        420,
+        160
+      ],
+      "id": "4d408103-f372-4fc4-b7c6-0b9b516e752e",
+      "name": "Generate Google Doc Proposal"
+    },
+    {
+      "parameters": {
+        "name": "generate_mermaid_diagram",
+        "description": "Call this tool to generate Mermaid.js diagram code. The input will be an Upwork job description, and the output will be the mermaid diagram code.",
+        "workflowId": {
+          "__rl": true,
+          "value": "IrvGoGNakAvKjjbw",
+          "mode": "list",
+          "cachedResultName": "UPWORK_03. Generate Mermaid Code"
+        },
+        "responsePropertyName": "mermaidCode"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        580,
+        160
+      ],
+      "id": "429a28d5-fcd8-48d2-8f1d-cba0fd044941",
+      "name": "Generate Mermaid.js"
+    },
+    {
+      "parameters": {
+        "content": "## Top-Level Workflow\n",
+        "height": 400,
+        "width": 1080,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -100
+      ],
+      "id": "867c9a27-d261-4362-8ea7-5b845fc5b582",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        160
+      ],
+      "id": "68eb5151-e044-4304-9614-b8ffb8d03d24",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-04-21T23:34:41.890Z",
+      "updatedAt": "2025-04-21T23:34:41.890Z",
+      "id": "hZKJyVB4KxO67OZ3",
+      "name": "N8N Course"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-22T17:57:56.856Z",
+  "versionId": "aa04bc54-a968-4f68-a7e9-f4e1bf2079de"
+}
