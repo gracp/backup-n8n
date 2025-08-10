@@ -1,0 +1,29 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-04-22T19:04:53.235Z",
+  "id": "vOTXTvBQdinaxqbl",
+  "isArchived": false,
+  "meta": null,
+  "name": "YT AI Agent",
+  "nodes": [],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "backups",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-04-22T19:04:56.694Z",
+      "updatedAt": "2025-04-22T19:04:56.694Z",
+      "id": "vYqE2Ewtjk4ulTUv",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-22T19:04:58.750Z",
+  "versionId": "1652fc3a-356c-4fec-8057-631b95459d10"
+}
