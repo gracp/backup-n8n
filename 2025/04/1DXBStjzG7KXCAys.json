@@ -1,0 +1,171 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Variable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variable": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-21T23:59:46.951Z",
+  "id": "1DXBStjzG7KXCAys",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "UPWORK_01. Generate Application Copy",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "59c7adae-d350-4a5d-9f7d-0b5c4e03b62b",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini-2025-04-14",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI-2025-04-14"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a helpful, intelligent Upwork application writer.",
+              "role": "system"
+            },
+            {
+              "content": "=I'm an automation specialist applying to jobs on freelance platforms.\n\nYour task is to take as input an Upwork job description and return as output a customized proposal.\n\nHigh-performing proposals are typically templated as follows:\n\n```\nHi, I do {thing} all the time. Am so confident I'm the right fit for you that I just created a workflow diagram + a demo of your {thing} in no-code: $$$\n\nAbout me: I'm a {relevantJobDescription} that has done {coolRelevantThing}. Of note, {otherCoolTieIn}.\n\nHappy to do this for you anytime—just respond to this proposal (else I don't get a chat window). \n\nThank you!\n```\n\nOutput your results in JSON using this format:\n\n{\"proposal\":\"Your proposal\"}\n\nRules:\n- $$$ is what we're using to replace links later on, so leave that untouched.\n- Write in a casual, spartan tone of voice.\n- Don't use emojis or flowery language.\n- If there's a name included somewhere in the description, add it after \"Hi\"\n\nSome facts about me for the personalization: {{ $json.aboutMe }}\n"
+            },
+            {
+              "content": "={\"jobDescription\":\"{{ $('Execute Workflow Trigger').item.json.query }}\"}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        440,
+        0
+      ],
+      "id": "e3ffeab4-651d-4c38-925b-85e5ba2c7621",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "q5LKemU3s5n59KGL",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e980c92c-07d9-400e-b40c-a8fbdbe8bbcb",
+              "name": "aboutMe",
+              "value": "I'm an AI and Automation Specialist who builds tailored AI-powered and no-code systems to help businesses win more clients, streamline workflows, and drive significant revenue growth.\nSome notable things I've done:\n•\nMedTech Lead Generation: Developed an AI-driven marketing funnel for a medical device manufacturer, resulting in an increase of qualified leads from 10 to 120 per month within 3 months. This showcases expertise in AI-Powered Outreach Funnels for the MedTech industry.\n•\nE-commerce Sales Pipeline Growth: Automated LinkedIn and email outreach for a health e-commerce brand, generating a $50,000 sales pipeline in just 30 days. This highlights skills in Automated LinkedIn + email funnels for e-commerce.\n•\nMarketing Agency Efficiency Improvement: Implemented a ClickUp CRM & PM system for a marketing agency doing $500K/year, leading to a 40% reduction in project overruns. This demonstrates expertise in building No‑Code CRM & Workflow Builds for professional services.\n•\nDigital Agency Content Automation: Deployed a Whisper and n8n workflow for a digital agency, delivering over 50 micro-content posts weekly and contributing to 5K organic visitors per month. This showcases capabilities in Content Automation & SEO Engines.\n•\nRapid MVP Development & User Acquisition: Built a Chrome extension prototype with AI assistance in just two days, quickly onboarding over 2,000 beta users in the first week. This exemplifies skills in Rapid MVP & Chrome Extension Sprint.\n•\nPrint-on-Demand Revenue Generation: Automated print-on-demand workflows for a merchandise startup targeting Taylor Swift fans, achieving $20,000 in revenue in the first campaign with no upfront inventory costs. This shows experience in Shopify & Amazon store automation relevant to e-commerce.\n•\nHigh-Volume Lead Processing & Engagement: Processed and verified over 10,000 prospects using Apollo.io and custom automation, achieving a 25% email open rate and 8% reply rate across various campaigns. This demonstrates proficiency in Outreach & Lead Generation using sophisticated tools.\n•\nEmail Marketing Sales Growth: Achieved over 100% sales growth for Pacey MedTech through strategic email campaigns and distributor expansion. This highlights expertise in Email Marketing Strategy & Automation.\n•\nMRR Growth via Outreach: Scaled Grapo Mark to over $15,000 Monthly Recurring Revenue (MRR) with optimized outreach campaigns. This demonstrates the ability to drive revenue through effective Outreach & Lead Generation strategies.",
+              "type": "string"
+            },
+            {
+              "id": "22886c25-1ed2-4e4e-893e-85644d73cb22",
+              "name": "$workflow.id",
+              "value": "={{ $execution.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "4615cc39-552b-4b87-a4d1-48ce26e7379e",
+      "name": "Set Variable"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "468a03c7-1537-435a-9f98-ce7c58a51c8b",
+              "name": "response",
+              "value": "={{ $json.message.content.proposal }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        0
+      ],
+      "id": "e1698278-6625-47fb-8277-8f97ef724c59",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-04-21T23:34:41.890Z",
+      "updatedAt": "2025-04-21T23:34:41.890Z",
+      "id": "hZKJyVB4KxO67OZ3",
+      "name": "N8N Course"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-22T17:58:33.714Z",
+  "versionId": "d88ff011-5028-4fd4-b25b-f9fa62afaa99"
+}
