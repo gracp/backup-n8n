@@ -1,0 +1,1073 @@
+{
+  "active": false,
+  "connections": {
+    "OpenAI": {
+      "main": [
+        []
+      ]
+    },
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Merge chapters title and text",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Basic LLM Chain1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "Create post title and structure",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload media": {
+      "main": [
+        [
+          {
+            "node": "Set image ID for the post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post on Wordpress": {
+      "main": [
+        [
+          {
+            "node": "Generate featured image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final article text": {
+      "main": [
+        [
+          {
+            "node": "Post on Wordpress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check data consistency": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate featured image": {
+      "main": [
+        [
+          {
+            "node": "Upload media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set image ID for the post": {
+      "main": [
+        [
+          {
+            "node": "Form1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge chapters title and text": {
+      "main": [
+        [
+          {
+            "node": "Final article text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create post title and structure": {
+      "main": [
+        [
+          {
+            "node": "Check data consistency",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Check data consistency",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain1": {
+      "main": [
+        [
+          {
+            "node": "Merge chapters title and text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-09T06:59:48.011Z",
+  "id": "VOj5DdvUGC92qP7z",
+  "isArchived": false,
+  "meta": null,
+  "name": "T : Write a WordPress post with AI (starting from a few keywords)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Data check",
+        "height": 371.765663140765,
+        "width": 301.3874093724939,
+        "color": 4
+      },
+      "id": "968fe525-ce30-42f4-89a8-c62b022b7049",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        940,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Checks that the data returned by OpenAI is correct",
+        "height": 80,
+        "width": 272.8190508599808,
+        "color": 7
+      },
+      "id": "f18b9e93-6e2b-4849-ad32-fd2e053d7fca",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        960,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Draft on WordPress",
+        "height": 392,
+        "width": 302,
+        "color": 5
+      },
+      "id": "43952711-dbdf-4a4f-8451-6eb00fb3f178",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2340,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "The article is posted as a draft on WordPress",
+        "height": 80,
+        "width": 254.77269221373095,
+        "color": 7
+      },
+      "id": "003ca2dc-7481-4029-abf5-f31ff97dab20",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2360,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Featured image",
+        "height": 389,
+        "width": 678,
+        "color": 3
+      },
+      "id": "4c67449d-31fd-45d0-99ba-a5f642f1be18",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2660,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "The image is generated with Dall-E, uploaded to WordPress, and then connected to the post as its featured image",
+        "height": 80,
+        "width": 517.9195082760601,
+        "color": 7
+      },
+      "id": "97fd007c-9b15-4e12-ab27-4b6396d74012",
+      "name": "Sticky Note11",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2680,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Starting from the given keywords, generates the article title, subtitle, chapters, and image prompt",
+        "height": 80,
+        "width": 287.370178643191,
+        "color": 7
+      },
+      "id": "dd51e66a-a366-4925-b01e-2afde251a697",
+      "name": "Sticky Note12",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Article structure",
+        "height": 371,
+        "width": 360,
+        "color": 6
+      },
+      "id": "59b15735-76a5-4187-a797-dff1f5817de5",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        540,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## User form",
+        "height": 370.512611879577,
+        "width": 239.97343293577688,
+        "color": 7
+      },
+      "id": "238df4bf-444a-4f0a-a56b-0f79728d7f66",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "The user triggers the post creation",
+        "height": 80,
+        "width": 199.7721486302032,
+        "color": 7
+      },
+      "id": "d0f55d8f-2cdc-4dbc-ad32-2f8be4bdead0",
+      "name": "Sticky Note13",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        20,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## User feedback",
+        "height": 391,
+        "width": 220,
+        "color": 7
+      },
+      "id": "1a9e850c-0a38-4eee-9b67-361aff8acb99",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3360,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Final confirmation to the user",
+        "height": 80,
+        "width": 183.38125554060056,
+        "color": 7
+      },
+      "id": "c9dba8d2-93be-45ad-91f2-908579ad5ccb",
+      "name": "Sticky Note14",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3380,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUser is notified to try again since some data is missing",
+        "height": 288.4116890365125,
+        "width": 281.2716777103785,
+        "color": 7
+      },
+      "id": "27ae6064-f43b-4029-87c5-e7c241bfc0fb",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1280,
+        400
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWikipedia is used to write the article",
+        "height": 275,
+        "width": 340,
+        "color": 7
+      },
+      "id": "88457510-dcc1-45b8-ae09-e21d67e5a704",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        540,
+        400
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Settings",
+        "height": 370.512611879577,
+        "width": 226.71615243495023,
+        "color": 2
+      },
+      "id": "88f13ab8-9c3b-42d5-a012-612a6584aeb5",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        280,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Set the URL of your WordPress here",
+        "height": 80,
+        "width": 179.37633247508526,
+        "color": 7
+      },
+      "id": "b3418cc2-3b6a-494f-be65-39890a78edb4",
+      "name": "Sticky Note15",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        300,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Chapters split",
+        "height": 370.512611879577,
+        "width": 225.47038972308582,
+        "color": 2
+      },
+      "id": "214badfa-0fa5-4f66-bab8-bd94240057a9",
+      "name": "Sticky Note16",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1280,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Splits out chapter contents from the previous node",
+        "height": 80,
+        "width": 185.6051460344073,
+        "color": 7
+      },
+      "id": "46a04507-72cb-4c72-8f28-acde25d11a28",
+      "name": "Sticky Note17",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1300,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Writes the text for each chapter",
+        "height": 80,
+        "width": 287.370178643191,
+        "color": 7
+      },
+      "id": "eb8860d8-18e1-4bd6-a5cb-ed2ec8502d07",
+      "name": "Sticky Note18",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1560,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Chapters text",
+        "height": 370.512611879577,
+        "width": 333.40108076977657,
+        "color": 6
+      },
+      "id": "cd02104b-600e-443a-9a91-5acfd023e8bd",
+      "name": "Sticky Note19",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1540,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Content preparation",
+        "height": 514.2177254645992,
+        "width": 420.4253447940705,
+        "color": 4
+      },
+      "id": "a538ad75-2665-4bd5-9969-17c4fa8b266f",
+      "name": "Sticky Note21",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1900,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Merges the content and prepare it before sending it to WordPress",
+        "height": 80,
+        "width": 368.1523541074699,
+        "color": 7
+      },
+      "id": "48f80256-66c8-45fb-bd36-f0f19dfe7836",
+      "name": "Sticky Note22",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1920,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "formTitle": "Create a WordPress post with AI",
+        "formDescription": "Fill this form with the required information to create a draft post on WordPress",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Keywords (comma-separated)",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Number of chapters",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  },
+                  {
+                    "option": "5"
+                  },
+                  {
+                    "option": "6"
+                  },
+                  {
+                    "option": "7"
+                  },
+                  {
+                    "option": "8"
+                  },
+                  {
+                    "option": "9"
+                  },
+                  {
+                    "option": "10"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Max words count",
+              "fieldType": "number",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "path": "create-wordpress-post"
+        }
+      },
+      "id": "bcbc3e99-1add-4d62-8320-23a25bf0ac89",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        60,
+        200
+      ],
+      "webhookId": "080f8376-cc82-49cc-8dd0-6db36bb887ab",
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "message.content.chapters",
+        "options": {}
+      },
+      "id": "e9f76083-d3cf-4b5f-aad7-821504a527bf",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        1340,
+        200
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini-2025-04-14",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI-2025-04-14"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Write a chapter for the article: {{ $('Create post title and structure').item.json.message.content.title }}, {{ $('Create post title and structure').item.json.message.content.subtitle  }}, that talks about {{ $('Settings').item.json[\"keywords\"] }}\n\nThis is the prompt for the chapter titled {{ $json.title }}: {{ $json.prompt }}.\n\nGuidelines:\n- Just return the plain text for each chapter (no JSON structure).\n- Don't use markdown for formatting.\n- Use HTML for formatting, but limited to bold, italic and lists.\n- Don't add internal titles or headings.\n- The length of each chapther should be around {{ Math.round(($('Settings').item.json.words - 120)/ $('Settings').item.json.chapters) }} words long\n- Go deep in the topic you treat, don't just throw some superficial info\n{{ $itemIndex > 0 ? \"- The previous chapter talks about \" + $input.all()[$itemIndex-1].json.title : \"\" }}\n{{ $itemIndex > 0 ? \"- The promt for the previous chapter is \" + $input.all()[$itemIndex-1].json.prompt : \"\" }}\n{{ $itemIndex < $input.all().length ? \"- The following chapter will talk about \" + $input.all()[$itemIndex+1].json.title: \"\" }}\n{{ $itemIndex < $input.all().length ? \"- The prompt for the following chapter is \" + $input.all()[$itemIndex+1].json.prompt : \"\" }}\n- Consider the previous and following chapters what writing the text for this chapter. The text must be coherent with the previous and following chapters.\n- This chapter should not repeat the concepts already exposed in the previous chapter.\n- This chapter is a part of a larger article so don't include an introduction or conclusions. This chapter should merge with the rest of the article.\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "64b6b502-a905-4309-9f9d-b912b0eacbc7",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        1580,
+        200
+      ],
+      "typeVersion": 1.8,
+      "credentials": {
+        "openAiApi": {
+          "id": "q5LKemU3s5n59KGL",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c07386d7-9f51-4052-a62d-500e9aff9336",
+              "name": "wordpress_url",
+              "type": "string",
+              "value": "https://you-wordpress-url-here.com/"
+            },
+            {
+              "id": "2bbdd88a-3d66-4407-9b77-32af63f44e11",
+              "name": "keywords",
+              "type": "string",
+              "value": "={{ $json['Keywords (comma-separated)'] }}"
+            },
+            {
+              "id": "4a199e44-1033-446a-a019-e2e1a694009e",
+              "name": "chapters",
+              "type": "string",
+              "value": "={{ $json['Number of chapters'] }}"
+            },
+            {
+              "id": "312d2e97-d1b6-46d9-b2ae-35f7234b5404",
+              "name": "words",
+              "type": "string",
+              "value": "={{ $json['Max words count'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "25590de7-f64c-4424-be6e-a33ae5b9ba7f",
+      "name": "Settings",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        340,
+        200
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini-2025-04-14",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI-2025-04-14"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Write the title, the subtitle, the chapters details, the introduction, the conclusions, and an image prompt for a SEO-friendly article about these topics:\n{{ $json.keywords }}.\n\nInstructions:\n- Place the article title in a JSON field called `title`\n- Place the subtitle in a JSON field called `subtitle`\n- Place the introduction in a JSON field called `introduction`\n- In the introduction introduce the topic that is then explored in depth in the rest of the text\n- The introduction should be around 60 words\n- Place the conclusions in a JSON field called `conclusions`\n- The conclusions should be around 60 words\n- Use the conclusions to sum all said in the article and offer a conclusion to the reader\n- The image prompt will be used to produce a photographic cover image for the article and should depict the topics discussed in the article\n- Place the image prompt in a JSON field called `imagePrompt`\n- There should be {{ $json.chapters.toString() }} chapters.\n- For each chapter provide a title and an exaustive prompt that will be used to write the chapter text.\n- Place the chapters in an array field called `chapters`\n- For each chapter provide the fields `title` and `prompt`\n- The chapters should follow a logical flow and not repeat the same concepts.\n- The chapters should be one related to the other and not isolated blocks of text. The text should be fluent and folow a linear logic.\n- Don't start the chapters with \"Chapter 1\", \"Chapter 2\", \"Chapter 3\"... just write the title of the chapter\n- For the title and the capthers' titles don't use colons (`:`)\n- For the text, use HTML for formatting, but limited to bold, italic and lists.\n- Don't use markdown for formatting.\n- Always search on Wikipedia for useful information or verify the accuracy of what you write.\n- Never mention it if you don't find information on Wikipedia or the web\n- Go deep in the topic you treat, don't just throw some superficial info"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "id": "beb2a986-82b2-4600-bc14-3319ccb78607",
+      "name": "Create post title and structure",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        580,
+        200
+      ],
+      "typeVersion": 1.8,
+      "credentials": {
+        "openAiApi": {
+          "id": "q5LKemU3s5n59KGL",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "a656cdbc-2ce9-46d6-82cb-065e51ac9fe5",
+      "name": "Wikipedia",
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "position": [
+        680,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "9523cb70-8467-4e65-9ecf-65cb91c29cb7",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.message.content.title }}",
+              "rightValue": ""
+            },
+            {
+              "id": "d754869d-10fe-4348-807f-2e1bc82a7b41",
+              "operator": {
+                "type": "array",
+                "operation": "lengthGt",
+                "rightType": "number"
+              },
+              "leftValue": "={{ $json.message.content.chapters }}",
+              "rightValue": 0
+            },
+            {
+              "id": "79a60fc1-66f8-4cfc-a61b-de528dfb7978",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.message.content.subtitle }}",
+              "rightValue": ""
+            },
+            {
+              "id": "c0c44d88-1c3d-44ba-9030-6e8fa9f2860f",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.message.content.introduction }}",
+              "rightValue": ""
+            },
+            {
+              "id": "338cd7e0-d2b8-40f4-838d-3aaf618268d2",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.message.content.conclusions }}",
+              "rightValue": ""
+            },
+            {
+              "id": "76eb9ba1-7675-403c-9287-ac1319791ffe",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.message.content.imagePrompt }}",
+              "rightValue": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e03d1783-77bd-4ea6-bf4f-2ea9155fd6fe",
+      "name": "Check data consistency",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1020,
+        200
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "78953d11-f3a7-4143-8664-c127f59e599c",
+      "name": "Merge chapters title and text",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        1980,
+        320
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "jsCode": "let article = \"\";\n\n// Introduction\narticle += $('Create post title and structure').first().json.message.content.introduction;\narticle += \"<br><br>\";\n\nfor (const item of $input.all()) {\n  article += \"<strong>\" + item.json.title + \"</strong>\";\n  article += \"<br><br>\";\n  article += item.json.message.content;\n  article += \"<br><br>\";\n}\n\n// Conclusions\narticle += \"<strong>Conclusions</strong>\";\narticle += \"<br><br>\";\narticle += $('Create post title and structure').first().json.message.content.conclusions;\n\n\nreturn [\n  {\n    \"article\": article\n  }\n];"
+      },
+      "id": "d436b1a1-c23b-4c82-b0de-45c15e259ecc",
+      "name": "Final article text",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2160,
+        200
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "title": "={{ $('Create post title and structure').first().json.message.content.title }}",
+        "additionalFields": {
+          "content": "={{ $json.article }}",
+          "status": "draft"
+        }
+      },
+      "id": "8c3d1a29-7357-4aac-be9a-f1a74cb6e53d",
+      "name": "Post on Wordpress",
+      "type": "n8n-nodes-base.wordpress",
+      "position": [
+        2440,
+        200
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Generate a photographic image to be used as the cover image for the article titled: {{ $('Create post title and structure').first().json.message.content.title }}. This is the prompt for the image: {{ $('Create post title and structure').first().json.message.content.imagePrompt }}, photography, realistic, sigma 85mm f/1.4",
+        "options": {
+          "quality": "hd",
+          "size": "1792x1024",
+          "style": "natural"
+        }
+      },
+      "id": "dc0fe685-f8f4-4a06-80a1-63f428c05554",
+      "name": "Generate featured image",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        2740,
+        200
+      ],
+      "typeVersion": 1.8
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wp-demo.mondo.surf/wp-json/wp/v2/media",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wordpressApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Disposition",
+              "value": "attachment; filename=\"example.jpg\""
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "id": "cb7819ab-1e87-4113-b406-a8b536b1af27",
+      "name": "Upload media",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2960,
+        200
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://wp-demo.mondo.surf/wp-json/wp/v2/posts/{{ $('Post on Wordpress').first().json.id }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "featured_media",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "248defa4-7a17-4afd-8b48-8994f7b2ee6f",
+      "name": "Set image ID for the post",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        3180,
+        200
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Created Successfully!",
+        "completionMessage": "=The article {{ $json.title.rendered }} was correctly created as a draft on WordPress!",
+        "options": {}
+      },
+      "id": "81869041-231f-4a72-b183-08301daddfca",
+      "name": "Form1",
+      "type": "n8n-nodes-base.form",
+      "position": [
+        3420,
+        200
+      ],
+      "webhookId": "a9bf2986-4c9d-4d89-b5bf-ef6e93130b60",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "showText",
+        "responseText": "There was a problem creating the article, please refresh the form and try again!"
+      },
+      "id": "62c20843-9ea7-415a-976e-b01f80769d62",
+      "name": "Form",
+      "type": "n8n-nodes-base.form",
+      "position": [
+        1340,
+        460
+      ],
+      "webhookId": "691e1010-7083-46be-9e6e-4e77fb853a9a",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write the title, the subtitle, the chapters details, the introduction, the conclusions, and an image prompt for a SEO-friendly article about these topics:\n{{ $json.keywords }}.\n\nInstructions:{{ $json.chapters }}\n- Place the article title in a JSON field called `title`\n- Place the subtitle in a JSON field called `subtitle`\n- Place the introduction in a JSON field called `introduction`\n- In the introduction introduce the topic that is then explored in depth in the rest of the text\n- The introduction should be around 60 words\n- Place the conclusions in a JSON field called `conclusions`\n- The conclusions should be around 60 words\n- Use the conclusions to sum all said in the article and offer a conclusion to the reader\n- The image prompt will be used to produce a photographic cover image for the article and should depict the topics discussed in the article\n- Place the image prompt in a JSON field called `imagePrompt`\n- There should be {{ $json.chapters.toString() }} chapters.\n- For each chapter provide a title and an exaustive prompt that will be used to write the chapter text.\n- Place the chapters in an array field called `chapters`\n- For each chapter provide the fields `title` and `prompt`\n- The chapters should follow a logical flow and not repeat the same concepts.\n- The chapters should be one related to the other and not isolated blocks of text. The text should be fluent and folow a linear logic.\n- Don't start the chapters with \"Chapter 1\", \"Chapter 2\", \"Chapter 3\"... just write the title of the chapter\n- For the title and the capthers' titles don't use colons (`:`)\n- For the text, use HTML for formatting, but limited to bold, italic and lists.\n- Don't use markdown for formatting.\n- Always search on Wikipedia for useful information or verify the accuracy of what you write.\n- Never mention it if you don't find information on Wikipedia or the web\n- Go deep in the topic you treat, don't just throw some superficial info"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        580,
+        720
+      ],
+      "id": "29d37327-2ddd-4381-ab87-483bb7cef1dd",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro-preview-03-25",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        500,
+        960
+      ],
+      "id": "61b44b88-d031-4db7-927f-463633bee529",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a chapter for the article: {{ $('Create post title and structure').item.json.message.content.title }}, {{ $('Create post title and structure').item.json.message.content.subtitle  }}, that talks about {{ $('Settings').item.json[\"keywords\"] }}\n\nThis is the prompt for the chapter titled {{ $json.title }}: {{ $json.prompt }}.\n\nGuidelines:\n- Just return the plain text for each chapter (no JSON structure).\n- Don't use markdown for formatting.\n- Use HTML for formatting, but limited to bold, italic and lists.\n- Don't add internal titles or headings.\n- The length of each chapther should be around {{ Math.round(($('Settings').item.json.words - 120)/ $('Settings').item.json.chapters) }} words long\n- Go deep in the topic you treat, don't just throw some superficial info\n{{ $itemIndex > 0 ? \"- The previous chapter talks about \" + $input.all()[$itemIndex-1].json.title : \"\" }}\n{{ $itemIndex > 0 ? \"- The promt for the previous chapter is \" + $input.all()[$itemIndex-1].json.prompt : \"\" }}\n{{ $itemIndex < $input.all().length ? \"- The following chapter will talk about \" + $input.all()[$itemIndex+1].json.title: \"\" }}\n{{ $itemIndex < $input.all().length ? \"- The prompt for the following chapter is \" + $input.all()[$itemIndex+1].json.prompt : \"\" }}\n- Consider the previous and following chapters what writing the text for this chapter. The text must be coherent with the previous and following chapters.\n- This chapter should not repeat the concepts already exposed in the previous chapter.\n- This chapter is a part of a larger article so don't include an introduction or conclusions. This chapter should merge with the rest of the article.\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        1580,
+        460
+      ],
+      "id": "38916c1a-b876-4337-b854-0f3a10f23f71",
+      "name": "Basic LLM Chain1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro-exp-03-25",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        640
+      ],
+      "id": "df84e544-9995-427b-831b-c278f789457e",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "backups",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-09T22:39:49.147Z",
+  "versionId": "3d7ba667-de54-47d1-acdd-94af338f9e6d"
+}
