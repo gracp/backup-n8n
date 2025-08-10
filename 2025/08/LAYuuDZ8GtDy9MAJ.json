@@ -1,0 +1,446 @@
+{
+  "active": true,
+  "connections": {
+    "find_video_data1": {
+      "main": [
+        [
+          {
+            "node": "if_longer_than_3_",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_videos1": {
+      "main": [
+        [
+          {
+            "node": "loop_over_items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "group_data1": {
+      "main": [
+        [
+          {
+            "node": "save_data_to_memory1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "save_data_to_memory1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "retrieve_data_from_memory1": {
+      "main": [
+        [
+          {
+            "node": "response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "loop_over_items1": {
+      "main": [
+        [
+          {
+            "node": "retrieve_data_from_memory1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Data + Constants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_longer_than_3_": {
+      "main": [
+        [
+          {
+            "node": "group_data1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "get_videos1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data + Constants": {
+      "main": [
+        [
+          {
+            "node": "find_video_data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "loop_over_items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-10T04:31:27.597Z",
+  "id": "LAYuuDZ8GtDy9MAJ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "YT Trend Finder-Sub",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/youtube/v3/videos?",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $json.GOOGLE_API_KEY_YOUTUBE }}"
+            },
+            {
+              "name": "id",
+              "value": "={{ $json.id.videoId }}"
+            },
+            {
+              "name": "part",
+              "value": "contentDetails, snippet, statistics"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "78ee54a5-bbc0-400c-8f44-064f4dc90072",
+      "name": "find_video_data1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        768,
+        288
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "limit": 10,
+        "filters": {
+          "publishedAfter": "={{ new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() }}",
+          "q": "={{ $json.query.search_term }}",
+          "regionCode": "US"
+        },
+        "options": {
+          "order": "relevance",
+          "safeSearch": "moderate"
+        }
+      },
+      "id": "b2d4d61b-bf74-4edc-a6ee-d4db8a0c92c0",
+      "name": "get_videos1",
+      "type": "n8n-nodes-base.youTube",
+      "position": [
+        272,
+        128
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "ppxGpcPPCj7xV8Sy",
+          "name": "YouTube account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b9b9117b-ea14-482e-a13b-e68b8e6b441d",
+              "name": "response",
+              "type": "string",
+              "value": "={{ $input.all() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "551421e9-dde8-40a1-8feb-061e45f8cbfb",
+      "name": "response1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1168,
+        80
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "47c172ad-90c8-4cf6-a9f5-50607e04cc90",
+              "name": "id",
+              "type": "string",
+              "value": "={{ $json.items[0].id }}"
+            },
+            {
+              "id": "9e639efa-0714-4b06-9847-f7b4b2fbef59",
+              "name": "viewCount",
+              "type": "string",
+              "value": "={{ $json.items[0].statistics.viewCount }}"
+            },
+            {
+              "id": "93328f00-91b8-425b-ad0f-a330b2f95242",
+              "name": "likeCount",
+              "type": "string",
+              "value": "={{ $json.items[0].statistics.likeCount }}"
+            },
+            {
+              "id": "015b0fb2-2a98-464c-a21b-51100616f26a",
+              "name": "commentCount",
+              "type": "string",
+              "value": "={{ $json.items[0].statistics.commentCount }}"
+            },
+            {
+              "id": "cf1e1ec3-a138-42b8-8747-d249afa58dd3",
+              "name": "description",
+              "type": "string",
+              "value": "={{ $json.items[0].snippet.description }}"
+            },
+            {
+              "id": "c5c9a3a2-b820-4932-a38a-e21102992215",
+              "name": "title",
+              "type": "string",
+              "value": "={{ $json.items[0].snippet.title }}"
+            },
+            {
+              "id": "38216ead-1f8d-4f93-b6ad-5ef709a1ad2a",
+              "name": "channelTitle",
+              "type": "string",
+              "value": "={{ $json.items[0].snippet.channelTitle }}"
+            },
+            {
+              "id": "ff34194d-3d46-43a8-9127-84708987f536",
+              "name": "tags",
+              "type": "string",
+              "value": "={{ $json.items[0].snippet.tags.join(', ') }}"
+            },
+            {
+              "id": "e50b0f7b-3e37-4557-8863-d68d4fa505c8",
+              "name": "channelId",
+              "type": "string",
+              "value": "={{ $json.items[0].snippet.channelId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0ed05734-4baa-427d-971d-0da8fa8d7d1e",
+      "name": "group_data1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1232,
+        272
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const workflowStaticData = $getWorkflowStaticData('global');\n\nif (typeof workflowStaticData.lastExecution !== 'object') {\n workflowStaticData.lastExecution = {\n response: \"\"\n };\n}\n\nfunction removeEmojis(text) {\n return text.replace(/[\\u{1F600}-\\u{1F64F}|\\u{1F300}-\\u{1F5FF}|\\u{1F680}-\\u{1F6FF}|\\u{2600}-\\u{26FF}|\\u{2700}-\\u{27BF}]/gu, '');\n}\n\nfunction cleanDescription(description) {\n return description\n .replace(/https?:\\/\\/\\S+/g, '')\n .replace(/www\\.\\S+/g, '')\n .replace(/ +/g, ' ')\n .trim();\n}\n\nconst currentItem = { ...$input.item };\n\nif (currentItem.description) {\n currentItem.description = cleanDescription(currentItem.description);\n}\n\nlet sanitizedItem = JSON.stringify(currentItem)\n .replace(/\\\\r/g, ' ')\n .replace(/https?:\\/\\/\\S+/g, '')\n .replace(/www\\.\\S+/g, '')\n .replace(/\\\\n/g, ' ')\n .replace(/\\n/g, ' ')\n .replace(/\\\\/g, '')\n .replace(/ +/g, ' ')\n .trim();\n\nif (workflowStaticData.lastExecution.response) {\n workflowStaticData.lastExecution.response += ' ### NEXT VIDEO FOUND: ### ';\n}\n\nworkflowStaticData.lastExecution.response += removeEmojis(sanitizedItem);\n\nreturn workflowStaticData.lastExecution;\n"
+      },
+      "id": "9412330b-ac78-41b5-9863-07d3f7f17155",
+      "name": "save_data_to_memory1",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1424,
+        272
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "const workflowStaticData = $getWorkflowStaticData('global');\n\nconst lastExecution = workflowStaticData.lastExecution;\n\nreturn lastExecution;"
+      },
+      "id": "841a599c-f556-4e7d-a1f1-543a65c04d0e",
+      "name": "retrieve_data_from_memory1",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        848,
+        80
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "16d864cd-b840-4060-837d-7bfe7ff75584",
+      "name": "loop_over_items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        448,
+        128
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "08ba3db9-6bcf-47f8-a74d-9e26f28cb08f",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "leftValue": "={{ \n (() => {\n const duration = $json.items[0].contentDetails.duration;\n\n // Helper function to convert ISO 8601 duration to seconds\n const iso8601ToSeconds = iso8601 => {\n const match = iso8601.match(/PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)S)?/);\n const hours = parseInt(match[1] || 0, 10);\n const minutes = parseInt(match[2] || 0, 10);\n const seconds = parseInt(match[3] || 0, 10);\n return hours * 3600 + minutes * 60 + seconds;\n };\n\n // Convert duration to seconds\n const durationInSeconds = iso8601ToSeconds(duration);\n\n // Check if greater than 210 seconds (3 minutes 30 seconds)\n return durationInSeconds > 210;\n })() \n}}",
+              "rightValue": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "80848111-8b03-4d82-beb9-0571104e768b",
+      "name": "if_longer_than_3_",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        944,
+        288
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "content": "This part is called as a sub-workflow by the main YT Trend Finder workflow",
+        "height": 520,
+        "width": 1767,
+        "color": 5
+      },
+      "id": "d5ae8839-49ab-43af-950c-2a5ac216d529",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        48,
+        16
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        128
+      ],
+      "id": "004f5cee-9a6a-432e-bfe0-821a60e125a1",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "putAllInOneKey": false
+      },
+      "type": "n8n-nodes-globals.globalConstants",
+      "typeVersion": 1,
+      "position": [
+        592,
+        288
+      ],
+      "id": "3aebdb50-35ed-44d5-8670-143f85186b21",
+      "name": "Data + Constants",
+      "credentials": {
+        "globalConstantsApi": {
+          "id": "Q0Rs5XBl3zeSaNSZ",
+          "name": "LLM API Keys"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        272,
+        320
+      ],
+      "id": "a1cef140-1e82-4d96-8cbe-d4db2adaff9f",
+      "name": "Wait",
+      "webhookId": "8d7fe886-b6d0-497e-8ec2-667fce1816a6"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "global": {
+      "lastExecution": {
+        "response": "{\"json\":{\"id\":\"z17HXdNYti0\",\"viewCount\":\"48942\",\"likeCount\":\"2170\",\"commentCount\":\"306\",\"description\":\"Create your own AI avatar for free with Invideo. If you’re consistently producing content or UGC ads, check out their “Generate Plan” to create multiple videos/ads starting at $100/month. Learn more at an insane amount of news to unpack this week - from GPT-5, to Claude 4.1, to Genie 3... let's demo and talk about everything!! Discover More: ️ Explore AI Tools & News: Weekly Newsletter: The Next Wave Podcast: Instagram: Personal Twiter/X: Future Tools Twiter/X: Threads: LinkedIn: From Today's Video: OpenAI launches GPT-5, its smartest and fastest AI model with advanced expert-level intelligence - incorporates OpenAI’s GPT-5 into consumer, developer and enterprise offerings - OpenAI launches gpt-oss-120b and gpt-oss-20b, advancing open-weight reasoning AI models - optimizes ChatGPT to improve user learning, problem-solving, and productivity capabilities - launches Claude Opus 4.1 to advance reliable and interpretable AI systems - DeepMind unveils Genie 3, an AI model that generates diverse interactive environments from text - Gemini now lets users create personalized illustrated storybooks with custom art and audio - Imagine Launches for SuperGrok and Premium+ Subscribers with Latest App Update - Crafting with Native Text Rendering - Updates - Veo 3 Image to Video Now Available + Lucid Origin Model - Unveils Eleven Music: Advanced AI Music Model with Multi-Lingual Capabilities - Launches HD Video Mode for Pro and Mega Subscribers - Kaggle to host AI chess tournament to test reasoning skills of top AI models - 5 to Launch by Year-End Promises Elon Musk; Tesla Set for Major AI Breakthrough - work together! - Brand, sponsorship & business inquiries: mattwolfe@smoothmedia.co #AINews #AITools #ArtificialIntelligence Time Stamps: 0:00 - Intro 0:15 - ChatGPT-5 2:53 - Microsoft Copilot has GPT-5 3:22 - GPT-5 Game Coding Demo 5:09 - GPT-OSS 7:05 - GPT Mental Health Break 7:37 - Claude Opus 4.1 10:43 - Claude 4.1 vs. GPT-5 12:18 - Invideo Updates 14:01 - Google Deepmind Genie 3 16:15 - Google Gemini Storybooks 19:19 - Grok Imagine Launches SuperGrok and Premium + 21:40 - Qwen-Image 22:32 - Leonardo Updates 24:27 - ElevenLabs Unveils Eleven Music 28:09 - Midjourney HD Video Mode for Pro and Mega 28:36 - Google’s Kaggle hosts Gaming Tournament 29:24 - Grok 5 Launch Coming?\",\"title\":\"The Biggest Week For AI News in 2025 (So Far)\",\"channelTitle\":\"Matt Wolfe\",\"tags\":\"AI, Artificial Intelligence, FutureTools, Futurism, Machine Learning, Deep Learning, Future Tools, Matt Wolfe, AI News, AI Tools, chatgpt, openai, google gemini, microsoft, copilot, anthropic, claude\",\"channelId\":\"UChpleBmo18P08aKCIgti38g\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"QOJzpirUnU0\",\"viewCount\":\"13232\",\"likeCount\":\"1133\",\"commentCount\":\"21\",\"description\":\"In this edition of our free AI tools series, I have 5 free amazing AI tools to share with you all that you’ll wish you knew about earlier! #freeai #ai #aitools Subscribe! ▶ This Video ▶ AI Tools” Playlist Intro 0:16 Udio 3:05 Gemini - Imagen 4 3:53 Whisk – Imagen 4 5:17 Clipchamp 6:50 Infografix 8:55 Text to Speech Online Udio 4 to Speech Online MORE VIDEOS: 6 FREE PROGRAMS We Can’t Live Without! 10 Best TV Shows to Watch Now! Most Amazing Websites You Didn’t Know Existed! to STOP Microsoft from SPYING on You! FREE AI Tools …So Good They Feel ILLEGAL to Know! at Brett In Tech we make videos about technology, streaming video services, life hacks and anything else that people might find useful to know about. Having been on YouTube for several years this channel has evolved but the goal is still the same. We aim to educate and make people aware of resources that can be helpful to them in their daily life.\",\"title\":\"5 FREE AI Tools You'll Wish You Knew Earlier! 2025\",\"channelTitle\":\"Brett In Tech\",\"tags\":\"5 Free AI Tools You’ll Wish You Knew Earlier 2025, Top 5 Best Free AI Tools, Best Artificial Intelligence Tools, Top 5 Best Free AI Tools That Will Blow Your Mind, AI Software, Free AI Tools, AI Apps, Top AI Tools, New Free AI Tools, AI Websites, Useful Free AI Tools, Udio, Google Gemini, Imagen 4, Whisk, Clipchamp, Infografix, Text to Speech, Free, AI, Artificial Intelligence, Machine Learning, Tools, 2025, Brett In Tech\",\"channelId\":\"UCaSM4GqhbaVmRT7fmmFmR1w\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"wfxxrKtETFM\",\"viewCount\":\"29156\",\"likeCount\":\"3030\",\"commentCount\":\"189\",\"description\":\"The U.S. and Germany are sending Ukraine 33,000 Auterion Skynode AI drone kits, and this could be one of the most important tech transfers of the war so far. These advanced AI modules can turn almost any FPV or loitering munition into a semi-autonomous, jamming-resistant strike platform. Think of them as the brains that let drones hunt, track, and strike without constant pilot input. In this video, I break down exactly what Skynode is, how it works, and why it’s a changer of the game, so to speak… We’ll look at its real-world capabilities, including GPS-jamming resistance, onboard AI target recognition, and its potential for swarm warfare. I’ll also cover how it stacks up against platforms like Nvidia’s Jetson Orin, and what this means for Ukraine’s rapidly evolving drone doctrine. We’ll talk tactics, from autonomous wolfpack strikes designed to overwhelm Russian air defenses, to precision long-range FPV attacks that can be coordinated without a constant data link. And I’ll explain why Russia’s own AI drone programs are lagging behind, giving Ukraine a short but critical technological advantage. If you want to understand how AI is rewriting the rules of modern warfare, and why this shipment could cement Ukraine as a leader in autonomous battlefield systems, stick around. This is the future of combat, and it’s arriving by the thousands.  Subscribe for more breakdowns of military tech, defense strategy, and battlefield innovation from Ukraine and beyond. Let’s hit that 100K milestone together. ️ Glory to Ukraine. Glory to the heroes. Crimea is Ukraine. Video sources: The U.S. and Germany are sending thousands of AI drone kits to Ukraine, significantly boosting their drone warfare capabilities. This injection of advanced military technology will help refine their battlefield strategies, especially in modern warfare scenarios. With increased drone AI, Ukraine is better equipped to handle evolving threats. #Ukraine #Germany #UkraineWar #News #Military #RussiaUkraineWar #AIWarfare #DroneWarfare #Skynode #Auterion #EdgeComputing #UkraineDrones #Pentagon #UkrainianMilitary #NATO #UkrainianDefense #LoiteringMunitions #ElectronicWarfare #BattlefieldAI #MilitaryTechnology #UkraineVictory #CombatDrones #DefenseTech #OpenSourceWarfare\",\"title\":\"33,000 AI Drone Kits Sent to Ukraine - What's REALLY Going On?\",\"channelTitle\":\"Wes O'Donnell\",\"tags\":\"most advanced military drones, fpv drone, drone, new military drones, best military drones, us military drones, ukraine war, news, advanced military drones, russia ukraine war, russia war, russia ukraine news, russia ukraine war update, ukraine war update\",\"channelId\":\"UCnRmC8k3qzn0Qxq-nQOWmOA\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"d01nPAcAB1A\",\"viewCount\":\"6698\",\"likeCount\":\"185\",\"commentCount\":\"46\",\"description\":\"Want to get more customers, make more profit & save 100s of hours with AI? Get a FREE SEO strategy Session + Discount Now:   Want more money, traffic and sales from SEO? Join the SEO Elite Circle Need AI Automation Services? Book an AI Discovery Session Here: below for FREE access to  50 FREE AI SEO TOOLS  200+ AI SEO Prompts!  FREE AI SEO COMMUNITY with 2,000 SEOs !  Free AI SEO Course  Plus TODAY's Video NOTES... Want a Custom GPT built? Order here: Join our FREE AI SEO Accelerator here: Need consulting? Book a call with us here: AI News: NEW GPT 5 + Chinese AI Super Agents\",\"channelTitle\":\"Julian Goldie SEO\",\"tags\":\"seo, chatgpt, seotips\",\"channelId\":\"UCGpsgNbzdF7BECCVbB1COHw\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"yL9MTMCDYpQ\",\"viewCount\":\"3405\",\"likeCount\":\"157\",\"commentCount\":\"22\",\"description\":\"Try DeepAgent The Best AI Tool For Automating Your Work: the end of this video you’re going to know about a beginner friendly SUPER AI Agent that lets you automate your work in seconds. If you want to build out AI workflows and AI automations without knowing how to code this video is for you. Join AI Automation School (Learn To Automate Your Work & Make $ With AI)  NEW SUPER AI Agent Lets You Automate Your Work in Seconds (Beginner Friendly)\",\"channelTitle\":\"Rob The AI Guy\",\"tags\":\"make money using chatgpt agent, ai for business, ai personal assistant, ai tutorial, ai automation, ai automation agency, start an ai automation agency, ai automation guide, how to start an ai automation agency, ai agent, ai agents, ai agents use cases, ai agent startup, how to use ai agents, how to use ai agents of taskade, artificial intelligence, deepagent, deepagent tutorial, deepagent abacus, abacus ai, make money ai agents, how to build ai agents\",\"channelId\":\"UC0FBv8ckxw1hrZxbUm3G7hA\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"kMELi3CjSwI\",\"viewCount\":\"6879\",\"likeCount\":\"155\",\"commentCount\":\"13\",\"description\":\"Want to get more customers, make more money & save 100s of hours with AI? Join me in the AI Profit Boardroom: a FREE AI Automation Session  AI Agents with GPT-5: Step-by-Step Guide Using N8N In this episode, we dive into building AI agents using the recently released GPT-5 API. Learn how to set up and deploy an AI agent using the N8N automation platform. We'll guide you through each step, from creating a workflow in N8N, obtaining your OpenAI API key, to integrating GPT-5 for building powerful AI solutions. Discover the advantages of GPT-5 including high benchmarks, multimodal reasoning, and a large token context window. We'll also cover different GPT-5 models such as Mini and Nano, and show you how to utilize these to optimize costs and performance. Finally, find out how to deploy your AI agent, connect it to WordPress for SEO content creation, and explore more advanced features. Stay tuned until the end for valuable resources and tutorials available in the AI Profit Boardroom, and learn how to automate various tasks to boost productivity and efficiency. 00:00 Introduction to Building AI Agents with GPT-5 00:14 Setting Up Your Workflow in NA 10 01:09 Choosing the Right GPT-5 Model 01:50 Connecting to OpenAI and API Key Setup 02:46 Creating and Testing Your First AI Agent 05:41 Implementing Memory in Your AI Agent 06:27 Deploying Your AI Agent 07:57 Advanced Customizations and SEO Content Creation 13:47 Comparing GPT-5 and Claude for Content Creation 14:33 Importing and Using NA 10 Workflows 15:38 Conclusion and Additional Resources\",\"title\":\"NEW 1-Click GPT-5 AI Agents are INSANE! 🤯\",\"channelTitle\":\"Julian Goldie SEO\",\"tags\":\"seo, chatgpt, seotips\",\"channelId\":\"UCGpsgNbzdF7BECCVbB1COHw\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"PMkwuEJFRpQ\",\"viewCount\":\"817\",\"likeCount\":\"67\",\"commentCount\":\"7\",\"description\":\"Want to get more customers, make more profit & save 100s of hours with AI? Get a FREE SEO strategy Session + Discount Now:   Want more money, traffic and sales from SEO? Join the SEO Elite Circle Need AI Automation Services? Book an AI Discovery Session Here: below for FREE access to  50 FREE AI SEO TOOLS  200+ AI SEO Prompts!  FREE AI SEO COMMUNITY with 2,000 SEOs !  Free AI SEO Course  Plus TODAY's Video NOTES... Want a Custom GPT built? Order here: Join our FREE AI SEO Accelerator here: Need consulting? Book a call with us here: 3 NEW Chinese Autonomous AI Agents are INSANE…\",\"channelTitle\":\"Julian Goldie SEO\",\"tags\":\"seo, chatgpt, seotips\",\"channelId\":\"UCGpsgNbzdF7BECCVbB1COHw\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"yL9MTMCDYpQ\",\"viewCount\":\"3405\",\"likeCount\":\"157\",\"commentCount\":\"22\",\"description\":\"Try DeepAgent The Best AI Tool For Automating Your Work: the end of this video you’re going to know about a beginner friendly SUPER AI Agent that lets you automate your work in seconds. If you want to build out AI workflows and AI automations without knowing how to code this video is for you. Join AI Automation School (Learn To Automate Your Work & Make $ With AI)  NEW SUPER AI Agent Lets You Automate Your Work in Seconds (Beginner Friendly)\",\"channelTitle\":\"Rob The AI Guy\",\"tags\":\"make money using chatgpt agent, ai for business, ai personal assistant, ai tutorial, ai automation, ai automation agency, start an ai automation agency, ai automation guide, how to start an ai automation agency, ai agent, ai agents, ai agents use cases, ai agent startup, how to use ai agents, how to use ai agents of taskade, artificial intelligence, deepagent, deepagent tutorial, deepagent abacus, abacus ai, make money ai agents, how to build ai agents\",\"channelId\":\"UC0FBv8ckxw1hrZxbUm3G7hA\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"d01nPAcAB1A\",\"viewCount\":\"6698\",\"likeCount\":\"185\",\"commentCount\":\"46\",\"description\":\"Want to get more customers, make more profit & save 100s of hours with AI? Get a FREE SEO strategy Session + Discount Now:   Want more money, traffic and sales from SEO? Join the SEO Elite Circle Need AI Automation Services? Book an AI Discovery Session Here: below for FREE access to  50 FREE AI SEO TOOLS  200+ AI SEO Prompts!  FREE AI SEO COMMUNITY with 2,000 SEOs !  Free AI SEO Course  Plus TODAY's Video NOTES... Want a Custom GPT built? Order here: Join our FREE AI SEO Accelerator here: Need consulting? Book a call with us here: AI News: NEW GPT 5 + Chinese AI Super Agents\",\"channelTitle\":\"Julian Goldie SEO\",\"tags\":\"seo, chatgpt, seotips\",\"channelId\":\"UCGpsgNbzdF7BECCVbB1COHw\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"dgt5MLuqiV8\",\"viewCount\":\"4601\",\"likeCount\":\"247\",\"commentCount\":\"19\",\"description\":\"⭐ Get access to 40+ templates & exclusive learning here: Start Building with n8n! (I get kickback if you sign up here - thank you!) Curated roundups of real-world AI implementations enquiries: simon@scrapes.ai  Looking for custom built AI agents for your business?  the overwhelm and master n8n using the 80/20 principle - focus on just 20% of features to get 80% of results. Drawing from building over 150 automations with only 13 core nodes, this comprehensive guide covers everything from execution essentials and triggers to data processing, API connectivity, and AI integration. Perfect for escaping \"tutorial hell\" and building functional automations that actually deliver value for your business. 00:00 - The simple approach to master n8n 04:28 - Important n8n Nodes 04:34 - Basic Triggers Overview 06:58 - Universal Data Processing Techniques 16:00 - Connectivity and APIs Explained 25:55 - Receiving Data via Webhooks 26:08 - Storage Solutions for Data 31:32 - AI Integration in Workflows 34:09 - Using LLM for Sentiment Analysis 37:05 - Wrapping Up the 80/20 Concept #n8n #n8ntutorial #aiautomation\",\"title\":\"Master n8n with Only 13 Nodes (Skip Tutorial Hell)\",\"channelTitle\":\"Simon Scrapes  AI Automation\",\"tags\":null,\"channelId\":\"UCdCR4-uYOg5ju-IUuDnfnQA\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"LaoFa9X0qjY\",\"viewCount\":\"24\",\"likeCount\":\"3\",\"commentCount\":\"1\",\"description\":\"Join Scaling Systems & Get Client #1 on Autopilot + All My Systems ⤵️ ⤵️ Cold email outreach doesn’t have to mean low response rates. In this video, I show you exactly how I automate thousands of personalized cold emails every day—using n8n to handle everything from deliverability and multiple inbox setup to lead sourcing, AI-driven personalization, and hands-off reply management. You’ll see the step-by-step system that powers my agency’s outreach: building bulletproof infrastructure, sourcing and enriching hyper-targeted leads, personalizing at scale, and converting replies into real pipeline. If you want to turn cold email outreach into a growth engine that runs on autopilot and books meetings daily, this is the blueprint. What to watch next  1. I use. (some give me kickbacks—thank you!) 🧑‍ n8n: Instantly: Apollo: Apify: me on other platforms  ️ LinkedIn: Instagram: @Clarence.Automations Why watch? I’m Clarence, and I help entrepreneurs and B2B founders land clients—on autopilot. After sending 10+ million cold emails and building automated outreach systems for 35+ businesses, I know what actually works. On this channel, I break down the real systems, automations, and shortcuts I use to help others go from “zero” to a steady stream of leads (and income) without endless manual work. Whether you want your first client or you’re ready to scale, you’ll get everything you need—step-by-step, no fluff, no gatekeeping. Ready to automate your outreach and unlock more freedom? Hit subscribe, drop your questions below, and let’s get you results. Chapters 0:00 - 20 Vs 1,000 Personalised Emails (N8N) 0:30 - My - 5-Step Workflow 1:25 - #1 - Infrastructure 5:07 - #2 - Lead Sourcing (The 0.1% Way) 7:37 - #3 - Enrichment & Qualification 10:37 - #4 - Personalisation & Sending (2K Emails/Day) 13:39 - #5 - Reply Management & Performance 16:19 - GET All 5 N9N Workflows\",\"title\":\"How To Send 2,000 Emails a Day With N8N (AI Automation Outreach)\",\"channelTitle\":\"Clarence  AI Automations\",\"tags\":\"ai automation, ai agency, ai, ai automation agency, how to make money with ai, n8n lead generation, lead generation, make money with ai, lead generation automation n8n, automation agency, linkedin, linkedin automation, cold email, email lead generation, chatgpt, no code automations, ai business idea, automating, apollo, instantly, leads, business growth, online money making, n8n automations, n8n workflows, lead generation workflow, cold outreach, email, low cost lead generation\",\"channelId\":\"UCkqZxKsjMhyki46S0lXf9ng\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"Qcon78iQUnw\",\"viewCount\":\"13\",\"likeCount\":\"0\",\"commentCount\":\"0\",\"description\":\"Welcome to TechITInsights! In this video, we dive deep into n8n AI Agent Tools — a powerful no-code platform that lets you build intelligent AI workflows capable of making decisions, executing tasks, and automating complex processes.  What is an AI Agent in n8n?  How to use the AI Agent Tool node to connect to hundreds of integrations  Real-world use cases: customer support, market research, content automation, and more  Tips for building and scaling your own AI-powered workflows Whether you're a developer, tech enthusiast, or business professional looking to automate smarter, this video is for you!  Don’t forget to Like, Subscribe, and Hit the Bell Icon for more insightful tech tutorials and AI content. #n8n #AIAgents #Automation #NoCode #TechITInsights #ArtificialIntelligence #WorkflowAutomation #AItools\",\"title\":\"How to Build Smart AI Agents with n8n  No-Code Automation Powered by AI\",\"channelTitle\":\"Tech IT Insights\",\"tags\":null,\"channelId\":\"UCsPgmTF50QOQkgYvwndossQ\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"kMELi3CjSwI\",\"viewCount\":\"6908\",\"likeCount\":\"155\",\"commentCount\":\"13\",\"description\":\"Want to get more customers, make more money & save 100s of hours with AI? Join me in the AI Profit Boardroom: a FREE AI Automation Session  AI Agents with GPT-5: Step-by-Step Guide Using N8N In this episode, we dive into building AI agents using the recently released GPT-5 API. Learn how to set up and deploy an AI agent using the N8N automation platform. We'll guide you through each step, from creating a workflow in N8N, obtaining your OpenAI API key, to integrating GPT-5 for building powerful AI solutions. Discover the advantages of GPT-5 including high benchmarks, multimodal reasoning, and a large token context window. We'll also cover different GPT-5 models such as Mini and Nano, and show you how to utilize these to optimize costs and performance. Finally, find out how to deploy your AI agent, connect it to WordPress for SEO content creation, and explore more advanced features. Stay tuned until the end for valuable resources and tutorials available in the AI Profit Boardroom, and learn how to automate various tasks to boost productivity and efficiency. 00:00 Introduction to Building AI Agents with GPT-5 00:14 Setting Up Your Workflow in NA 10 01:09 Choosing the Right GPT-5 Model 01:50 Connecting to OpenAI and API Key Setup 02:46 Creating and Testing Your First AI Agent 05:41 Implementing Memory in Your AI Agent 06:27 Deploying Your AI Agent 07:57 Advanced Customizations and SEO Content Creation 13:47 Comparing GPT-5 and Claude for Content Creation 14:33 Importing and Using NA 10 Workflows 15:38 Conclusion and Additional Resources\",\"title\":\"NEW 1-Click GPT-5 AI Agents are INSANE! 🤯\",\"channelTitle\":\"Julian Goldie SEO\",\"tags\":\"seo, chatgpt, seotips\",\"channelId\":\"UCGpsgNbzdF7BECCVbB1COHw\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"Qz3OPZX4sXA\",\"viewCount\":\"78\",\"likeCount\":\"9\",\"commentCount\":\"0\",\"description\":\"Get N8n: agents are at an all-time high, and this video explains what they are and how they differ from basic AI workflows. Learn how to use them in your business to generate leads and save hours, using tools like N8N. Get started with ai automation using the practical tools mentioned. My Links: GHL: 30-day FREE trial of GoHighlevel   AI Agents Automate Everything..\",\"channelTitle\":\"James Louros\",\"tags\":null,\"channelId\":\"UCDaBeahdhH_yQmJYGdVptAg\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"QoDKNa_08cc\",\"viewCount\":\"1599\",\"likeCount\":\"57\",\"commentCount\":\"4\",\"description\":\"Use Instantly Today To Get 10x your leads, meetings and deals: this video, I show you exactly how to scrape data from any website using N8N. Whether you're just getting started with n8n or you're exploring advanced n8n automation techniques, this walkthrough will help you unlock the power of n8n ai agents and n8n ai workflows. I also cover how n8n agents can work with ai agent tools to streamline your lead generation and cold email outreach. If you're trying to improve your cold emailing results or need a step-by-step ai agent tutorial, this is for you. Learn how to build effective cold email sequences that boost your cold email marketing and help you master cold outreach. I also explain how to launch campaigns that support your cold email to get clients goals and increase your success in cold email lead generation. This method is perfect for anyone doing b2b lead generation, looking for powerful lead generation tools, or trying to develop a strong lead generation strategy. I’ll also walk through how ai agents are transforming the way we do lead gen, and how you can apply these techniques to your lead generation strategies. By the end of the video, you'll know how to use n8n, harness n8n ai, integrate ai agent systems, and execute a data-driven lead generation tutorial that converts. Instantly.ai is the leading software in the cold email space that helps you Infinitely scale your outreach campaigns with unlimited email accounts. Come send with us and join the fastest-growing cold outreach community: out Brandon's company: LinkedIn: results may vary based on numerous factors, including but not limited to your individual circumstances, the specific nature of your business, and market conditions. The examples included represent atypical outcomes. Your results may vary based on numerous factors, including but not limited to your individual circumstances, the specific nature of your business, and market conditions.\",\"title\":\"How to Scrape Data From Any Website Using N8N\",\"channelTitle\":\"Instantly\",\"tags\":\"n8n, n8n ai agent, n8n automation, n8n ai, how to use n8n, n8n ai agents, n8n agents, ai agent, ai agents, ai agent tutorial, ai, cold email, cold email marketing, cold email outreach, cold email to get clients, cold emailing, cold email lead generation, how to cold email, lead generation, b2b lead generation, lead gen, lead generation strategies, lead generation tools, how to generate leads, lead generation strategy, cold outreach, cold emails, lead generation tutorial\",\"channelId\":\"UCDVt6xCSRx3dqr_SGgc1hng\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"ae4qf6TB2nE\",\"viewCount\":\"202\",\"likeCount\":\"8\",\"commentCount\":\"3\",\"description\":\"Join our paid Skool community and go from beginner to expert in n8n and AI Automations!  our FREE Skool community and get all the resources you need to set this system up  Download the workflow for FREE here  Hello everyone, in this video I will show you how to build a workflow that completely automates your email inbox management and responses. I begin by demonstrating how the system automatically handles an incoming personal email, classifying it correctly and generating a natural-sounding response without any manual intervention. Next, I show you how the workflow intelligently manages follow-up emails in the same conversation thread, maintaining context and creating appropriate replies that continue the conversation naturally. Finally I then explain the technical setup of the workflow, walking through each node. Affiliate links — (We get a small kickback if you sign up, thanks for supporting!)  Start automating with n8n:  Try Apify for free: video and any associated workflows/templates are provided for educational and illustrative purposes only. The workflows shown are technical examples. You, as the user, are solely responsible for ensuring that any use complies with applicable laws, including the General Data Protection Regulation (GDPR) and other data privacy regulations. Chapters: 00:00 Intro 00:36 Workflow Demo with Personal Email 01:47 Follow-up Email Response Demo 03:03 Download the workflow for FREE (Link in the description) 03:22 Building the Workflow 09:40 Personal Email Branch 16:33 Business Email Branch  If You're Interested in Implementing AI Automations Into Your Business than send us an email at: info@swautomation.io #n8n #ai #n8ntutorial #aiautomation #aiagents #n8naiagent\",\"title\":\"I Built an AI Agent That Automates My Entire Email Using n8n (Free Template)\",\"channelTitle\":\"SW Automation\",\"tags\":\"ai, ai agents, ai agent, n8n, n8n automation, automation, ai automation, workflow automation, n8n tutorial, n8n guide, n8n ai agent, n8n email automation, email automation, n8n email assistant, n8n gmail automation, gmail automation, Email inbox automation\",\"channelId\":\"UC4P-y2WYvVAUUmcAZNI03Bw\"},\"pairedItem\":{\"item\":0}} ### NEXT VIDEO FOUND: ### {\"json\":{\"id\":\"jJZGc2Z16hE\",\"viewCount\":\"5\",\"likeCount\":\"1\",\"commentCount\":\"0\",\"description\":\"Discover how I built an AI-powered customer support chatbot in n8n using Gmail, Pinecone, and AI Agent. Watch it read, understand, and respond to customer questions automatically—24/7, no human needed! Click Below Link To Get Your Free Resources AI Chatbot That Reads Your Google Docs! (n8n+Pinecone) Credential Setup for n8n Workflows (Full Guide) Credential Setup for n8n Workflows (step-by-step Guide) n8n with any of the below methods: Install n8n For Free On Your Laptop n8n With Docker In Minutes (No Coding Needed!) Guide To Cloud Hosting n8n With GitHub And Render Way To Set Up n8n In Queue Mode On Railway (Full Guide) & Easy n8n Hosting With DigitalOcean (Full Walkthrough) To Tools Websites : N8n cloud contact to reach out: info@findbestsolution.tech Learn AI and tech with the best tools and tutorials by visiting to the ultimate hub for n8n automation, Make.com (formerly Integromat) tutorials, and powerful AI tools to help you automate your business, save time, and scale smarter. On this channel, you'll learn how to build no-code workflows, connect your favorite apps, and create advanced automation systems using tools like n8n, Make, and OpenAI. Whether you're a beginner or an automation pro, you’ll find step-by-step tutorials, use cases, and tips to take your automation skills to the next level. Subscribe to stay updated on the latest in AI automation, workflow building using n8n and make automation tools. #AIStack Affiliate disclaimer: We may receive a commission when any purchase is made using the affiliate links here,which helps us to bring you quality videos.\",\"title\":\"Automating Customer Support With AI: My n8n + Pinecone Build\",\"channelTitle\":\"AI Stack\",\"tags\":\"AI workflows, no-code automation, n8n tutorials, OpenAI automation, AI stack, make.com, AI tools, GPT automation, AI productivity, automation tutorials, AI customer support, AI chatbot, n8n automation, Pinecone vector database, Gmail automation, AI Agent tutorial, customer service automation, AI for business, chatbot tutorial, AI workflow automation, automate customer support, AI tools 2025, n8n tutorial, Pinecone tutorial, AI chatbot for Gmai\",\"channelId\":\"UCphxBNQl4mwAsyRQOq5chiQ\"},\"pairedItem\":{\"item\":0}}"
+      }
+    }
+  },
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-10T09:04:51.940Z",
+  "versionId": "a1397ad6-7cd9-496b-b44f-3018387ba2ff"
+}
