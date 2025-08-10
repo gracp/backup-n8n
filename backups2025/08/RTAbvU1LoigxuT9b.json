@@ -1,0 +1,209 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get many bookmarks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flatten JSON": {
+      "main": [
+        [
+          {
+            "node": "Filter new items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every 30 mins": {
+      "main": [
+        [
+          {
+            "node": "Get many playlist items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter new items": {
+      "main": [
+        [
+          {
+            "node": "Raindrop Bookmark",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many playlist items": {
+      "main": [
+        [
+          {
+            "node": "Flatten JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-09T01:14:56.100Z",
+  "id": "RTAbvU1LoigxuT9b",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Raindrop Organizer",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b022d188-ce81-402f-b66e-d6b056c2a7aa",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "bookmark",
+        "operation": "getAll",
+        "collectionId": 58592721,
+        "limit": 10
+      },
+      "type": "n8n-nodes-base.raindrop",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "91112115-a6ad-4e9f-b4b6-4be28bc0fbd4",
+      "name": "Get many bookmarks",
+      "credentials": {
+        "raindropOAuth2Api": {
+          "id": "W6trhBKyBVGd0a7P",
+          "name": "Raindrop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "const staticData = getWorkflowStaticData('global');\nconst newIds = items.map(item => item.json[\"resourceId\"][\"videoId\"]);\nconst oldIds = staticData.oldIds; \n\nif (!oldIds) {\n  staticData.oldIds = newIds;\n  return items;\n}\n\n\nconst actualNewIds = newIds.filter((id) => !oldIds.includes(id));\nconst actualNew = items.filter((data) => actualNewIds.includes(data.json[\"resourceId\"][\"videoId\"]));\nstaticData.oldIds = [...actualNewIds, ...oldIds];\n\nreturn actualNew;\n"
+      },
+      "name": "Filter new items",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        752,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "7e758303-b4d6-4ba8-a539-6695a74053e2"
+    },
+    {
+      "parameters": {
+        "functionCode": "item = item[\"snippet\"]\n\nreturn item;"
+      },
+      "name": "Flatten JSON",
+      "type": "n8n-nodes-base.functionItem",
+      "position": [
+        592,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "a28f4618-1d9e-49b9-9157-282f30199785"
+    },
+    {
+      "parameters": {
+        "resource": "bookmark",
+        "operation": "create",
+        "collectionId": 0,
+        "link": "=https://www.youtube.com/watch?v={{$json[\"resourceId\"][\"videoId\"]}}",
+        "additionalFields": {
+          "tags": "youtube",
+          "title": "={{$json[\"videoOwnerChannelTitle\"]}} | {{$json[\"title\"]}}"
+        }
+      },
+      "name": "Raindrop Bookmark",
+      "type": "n8n-nodes-base.raindrop",
+      "position": [
+        928,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "878d3f7b-8665-4913-9690-4ad3bdc45d16",
+      "credentials": {
+        "raindropOAuth2Api": {
+          "id": null,
+          "name": "Raindrop"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "value": 30,
+              "unit": "minutes"
+            }
+          ]
+        }
+      },
+      "name": "Every 30 mins",
+      "type": "n8n-nodes-base.cron",
+      "position": [
+        256,
+        464
+      ],
+      "typeVersion": 1,
+      "id": "a68fdaf2-73fe-4e0a-8a58-86c06e23c735"
+    },
+    {
+      "parameters": {
+        "resource": "playlistItem",
+        "operation": "getAll",
+        "playlistId": "PLup7Ucg5t-A8grjLjivr9pmdJUZLQFTI1",
+        "options": {}
+      },
+      "name": "Get many playlist items",
+      "type": "n8n-nodes-base.youTube",
+      "position": [
+        432,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "55e545c7-311b-443d-a370-fcde1affd73a",
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "ppxGpcPPCj7xV8Sy",
+          "name": "YouTube account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "backups",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-09T01:51:44.747Z",
+  "versionId": "bba28c92-5b1a-4470-ae61-0d4039b1c05b"
+}
