@@ -1,0 +1,128 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-22T00:01:09.132Z",
+  "id": "IrvGoGNakAvKjjbw",
+  "isArchived": false,
+  "meta": null,
+  "name": "UPWORK_03. Generate Mermaid Code",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "797761c8-d0d6-41ab-917e-a48f4a6bf6a2",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini-2025-04-14",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI-2025-04-14"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a helpful, intelligent Mermaid.js code writer.",
+              "role": "system"
+            },
+            {
+              "content": "=Your task is to create a solution-focused Mermaid flowchart based on an Upwork job description.\n\nOutput your results in plaintext using Mermaid code formatting. Only output the Mermaid diagram code - no extra text, no markdown formatting tags like ```mermaid.\n\nExample output format:\ngraph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;\n\nCRITICAL REQUIREMENTS:\n\n1. Create TWO distinct but connected subgraphs in your flowchart:\n   - First subgraph: Show the overall project workflow from initial consultation to ongoing relationship\n   - Second subgraph: Show the DETAILED technical automation workflow using either n8n OR Make.com (choose one based on job requirements)\n\n2. For the project workflow subgraph:\n   - Begin with initial client consultation\n   - Show analysis of current manual processes\n   - Include workflow design/implementation phases\n   - End with clear ongoing relationship elements (maintenance, expansion, etc.)\n   - Use directional flow showing the complete timeline\n\n3. For the technical automation subgraph:\n   - Include SPECIFIC named nodes for the exact automation platform (n8n or Make.com)\n   - Detail each automation step with clear, non-technical explanations\n   - Show how data flows between systems\n   - Include decision points and conditional logic\n   - Label all connections with meaningful action descriptions\n\n4. KPI visualization requirements:\n   - Include specific nodes that highlight KPI improvements\n   - For each automated process, show a \"KPI Impact\" node connected to it\n   - Label these with specific metrics improved (time saved, error reduction, etc.)\n   - Do NOT use specific quantitative values (no percentages or time estimates)\n   - Use distinctive coloring for KPI nodes to make them stand out\n\n5. Additional critical requirements:\n   - Use subgraphs to organize related nodes\n   - Include at least one decision node with multiple paths\n   - Show error handling/fallback processes\n   - Demonstrate how the solution addresses EACH specific pain point mentioned in the job description\n   - Include at least one feedback loop for continuous improvement\n   - Use different node shapes to distinguish between process types\n   - Keep total node count under 25 while maintaining comprehensiveness\n\nRemember: Your diagram must demonstrate a SPECIFIC SOLUTION to the client's problems, not just restate their requirements. It should serve as a visual pitch showing how you would approach their project.\n\nThe first character of your output must be 'g' (for graph)."
+            },
+            {
+              "content": "={{ $json.query }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        200,
+        0
+      ],
+      "id": "4cdd7d7e-b036-48a8-b931-933edd1022f4",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "q5LKemU3s5n59KGL",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d47590b5-3683-4afe-bc27-a25fb94a32d5",
+              "name": "mermaidCode",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        0
+      ],
+      "id": "83ca0083-19ab-4aac-a45d-b15ba33ac6d7",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-04-21T23:34:41.890Z",
+      "updatedAt": "2025-04-21T23:34:41.890Z",
+      "id": "hZKJyVB4KxO67OZ3",
+      "name": "N8N Course"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-23T01:16:48.334Z",
+  "versionId": "11a907b7-0183-44b2-9259-85e6ee78981c"
+}
