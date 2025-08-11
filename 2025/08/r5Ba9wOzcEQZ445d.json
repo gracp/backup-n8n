@@ -1,0 +1,117 @@
+{
+  "active": false,
+  "connections": {
+    "Reddit: Get Posts": {
+      "main": [
+        [
+          {
+            "node": "NoOp: Consolidate All Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate All Search Pairs": {
+      "main": [
+        [
+          {
+            "node": "Reddit: Get Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Generate All Search Pairs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-11T22:57:56.258Z",
+  "id": "r5Ba9wOzcEQZ445d",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Scrape Reddit",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "NoOp: Consolidate All Results",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        224
+      ],
+      "id": "afff2dfe-ad18-4070-b52a-b8f6ad1ec3b0"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "subreddit": "={{ $json.subreddit }}",
+        "keyword": "={{ $json.keyword }}",
+        "limit": 15,
+        "additionalFields": {}
+      },
+      "name": "Reddit: Get Posts",
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        912,
+        224
+      ],
+      "id": "c9338d7a-3bfc-446d-82f6-d5e9504f6864",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "4Ov2Dvr821eEUPyv",
+          "name": "Reddit account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "const searchQueries = [\n  {\n    \"subreddit\": \"automation\",\n    \"keywords\": \"n8n,workflow,questions\"\n  },\n  {\n    \"subreddit\": \"sales\",\n    \"keywords\": \"prospecting tool,lead generation,crm\"\n  },\n  {\n    \"subreddit\": \"marketing\",\n    \"keywords\": \"ai tools,automation,martech\"\n  }\n];\n\nconst allItems = [];\n\nfor (const query of searchQueries) {\n  const subreddit = query.subreddit;\n  const keywords = query.keywords.split(',');\n\n  for (const keyword of keywords) {\n    allItems.push({\n      json: {\n        subreddit: subreddit,\n        keyword: keyword.trim()\n      }\n    });\n  }\n}\n\nreturn allItems;"
+      },
+      "name": "Generate All Search Pairs",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        656,
+        224
+      ],
+      "id": "13b86a32-2b3b-44d5-81a4-88c6f7c3c75d"
+    },
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        432,
+        224
+      ],
+      "id": "00e5fa7b-7268-4d85-8979-5fecd36a1649"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-11T23:09:17.951Z",
+  "versionId": "d77d0b7e-3a60-4315-a8df-e5a330d47306"
+}
