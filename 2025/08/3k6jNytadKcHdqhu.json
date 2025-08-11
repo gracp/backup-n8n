@@ -1,0 +1,22 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-08-11T22:01:12.402Z",
+  "id": "3k6jNytadKcHdqhu",
+  "isArchived": false,
+  "meta": null,
+  "name": "Gmail",
+  "nodes": [],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-11T22:01:12.402Z",
+  "versionId": "8c4fb867-8f3f-489d-9a9b-5293898ac0b7"
+}
