@@ -1,0 +1,783 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Reddit Posts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request: Stack Overflow",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request: GitHub Discussions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Reddit Posts": {
+      "main": [
+        [
+          {
+            "node": "Set: Standardize Reddit Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request: Stack Overflow": {
+      "main": [
+        [
+          {
+            "node": "Set: Standardize SO Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request: GitHub Discussions": {
+      "main": [
+        [
+          {
+            "node": "Set: Standardize GitHub Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set: Standardize Reddit Data": {
+      "main": [
+        [
+          {
+            "node": "Merge: All Sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set: Standardize SO Data": {
+      "main": [
+        [
+          {
+            "node": "Merge: All Sources",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge: All Sources": {
+      "main": [
+        [
+          {
+            "node": "Filter: Initial Quality & Engagement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter: Initial Quality & Engagement": {
+      "main": [
+        [
+          {
+            "node": "AI Analyze: Lead Quality & Hot Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Analyze: Lead Quality & Hot Status",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "AI Generate: Lead Summary",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Analyze: Lead Quality & Hot Status": {
+      "main": [
+        [
+          {
+            "node": "AI Generate: Lead Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Generate: Lead Summary": {
+      "main": [
+        [
+          {
+            "node": "Set: Consolidate Lead Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set: Consolidate Lead Data": {
+      "main": [
+        [
+          {
+            "node": "If: Is Hot Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If: Is Hot Lead?": {
+      "main": [
+        [
+          {
+            "node": "Slack: Notify Team",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Sheets: Log Qualified Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack: Notify Team": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Log Qualified Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Slack: Notify Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-12T01:41:53.535Z",
+  "id": "TfZttIQjVQOaBFPu",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 7",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -272,
+        328
+      ],
+      "id": "0bd2a130-0c5b-4640-9c34-8073b357196a",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "subreddit": "automation,startups,smallbusiness,businesstech",
+        "keyword": "workflow efficiency,process optimization,AI implementation,business automation,cost reduction",
+        "limit": 50,
+        "additionalFields": {
+          "sort": "hot"
+        }
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        136
+      ],
+      "id": "93216c07-3351-42ab-a440-c3230cd8776f",
+      "name": "Get Reddit Posts",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "4Ov2Dvr821eEUPyv",
+          "name": "Reddit account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.stackexchange.com/2.3/questions?order=desc&sort=creation&site=stackoverflow&tagged=automation;business-process;workflow&pagesize=50",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -48,
+        328
+      ],
+      "id": "1a741974-fd34-443a-b77b-bdf173e4391b",
+      "name": "HTTP Request: Stack Overflow"
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/search/issues?q=automation+business+state:open&per_page=50",
+        "authentication": "headers",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -48,
+        520
+      ],
+      "id": "28ba27a4-80d5-4e5d-8bde-4cf633d57087",
+      "name": "HTTP Request: GitHub Discussions"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "post_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "name": "post_url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            },
+            {
+              "name": "post_title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "name": "post_text",
+              "value": "={{ $json.selftext }}",
+              "type": "string"
+            },
+            {
+              "name": "post_subreddit",
+              "value": "={{ $json.subreddit }}",
+              "type": "string"
+            },
+            {
+              "name": "post_date",
+              "value": "={{ DateTime.fromSeconds($json.created).toISO() }}",
+              "type": "string"
+            },
+            {
+              "name": "upvotes",
+              "value": "={{ $json.ups }}",
+              "type": "number"
+            },
+            {
+              "name": "comments_count",
+              "value": "={{ $json.num_comments }}",
+              "type": "number"
+            },
+            {
+              "name": "source_platform",
+              "value": "Reddit",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        136
+      ],
+      "id": "aa6f737e-abbe-4784-b8a4-3361d74821ca",
+      "name": "Set: Standardize Reddit Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "post_id",
+              "value": "={{ $json.question_id }}",
+              "type": "string"
+            },
+            {
+              "name": "post_url",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "name": "post_title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "name": "post_text",
+              "value": "={{ $json.body }}",
+              "type": "string"
+            },
+            {
+              "name": "post_subreddit",
+              "value": "Stack Overflow",
+              "type": "string"
+            },
+            {
+              "name": "post_date",
+              "value": "={{ DateTime.fromSeconds($json.creation_date).toISO() }}",
+              "type": "string"
+            },
+            {
+              "name": "upvotes",
+              "value": "={{ $json.score }}",
+              "type": "number"
+            },
+            {
+              "name": "comments_count",
+              "value": "={{ $json.answer_count }}",
+              "type": "number"
+            },
+            {
+              "name": "source_platform",
+              "value": "Stack Overflow",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        328
+      ],
+      "id": "b12cc60c-c137-4f46-8081-0033a1c953d2",
+      "name": "Set: Standardize SO Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "post_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "name": "post_url",
+              "value": "={{ $json.html_url }}",
+              "type": "string"
+            },
+            {
+              "name": "post_title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "name": "post_text",
+              "value": "={{ $json.body }}",
+              "type": "string"
+            },
+            {
+              "name": "post_subreddit",
+              "value": "GitHub",
+              "type": "string"
+            },
+            {
+              "name": "post_date",
+              "value": "={{ DateTime.fromISO($json.created_at).toISO() }}",
+              "type": "string"
+            },
+            {
+              "name": "upvotes",
+              "value": "={{ $json.reactions.hooray + $json.reactions.plus1 }}",
+              "type": "number"
+            },
+            {
+              "name": "comments_count",
+              "value": "={{ $json.comments }}",
+              "type": "number"
+            },
+            {
+              "name": "source_platform",
+              "value": "GitHub",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        520
+      ],
+      "id": "4bbeeecb-edac-4ba9-b4ae-cbcf784ee79e",
+      "name": "Set: Standardize GitHub Data"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        400,
+        232
+      ],
+      "id": "982daa1c-bcdb-4d5a-824d-e78763b9b895",
+      "name": "Merge: All Sources"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5f3a0c1d-2b4e-4f6d-8a9c-0d1e2f3a4b5c",
+              "leftValue": "={{ $json.post_text.length }}",
+              "operandTwo": 100,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "6a4b1c2d-3e5f-4g7h-8i0j-1k2l3m4n5o6p",
+              "leftValue": "={{ $json.upvotes }}",
+              "operandTwo": 2,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "7b5c2d3e-4f6g-5h7i-9j1k-2l3m4n5o6p7q",
+              "leftValue": "={{ $json.comments_count }}",
+              "operandTwo": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "8c6d3e4f-5g7h-6i8j-0k2l-3m4n5o6p7q8r",
+              "leftValue": "={{ DateTime.fromISO($json.post_date).toISO() }}",
+              "operandTwo": "={{ $today.minus(180,'days').toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        232
+      ],
+      "id": "f236e66e-a07d-4288-b986-7c81656e22b9",
+      "name": "Filter: Initial Quality & Engagement"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        920,
+        456
+      ],
+      "id": "1bdd8564-1bb1-4c1f-aeb9-581d59307328",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze the following online post for business opportunity, lead score, and hot lead status:",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Title: \"{{ $json.post_title }}\"\nContent: \"{{ $json.post_text }}\"\nEngagement (Upvotes/Score): {{ $json.upvotes }}\nEngagement (Comments): {{ $json.comments_count }}\n\nAnalyze this post for an AI automation agency. Does it describe a clear business problem or a need for a solution that an AI automation agency could address? (Response: `yes` or `no`)\n\nAssign a 'Lead Score' from 0-100, where higher indicates a more clearly defined problem, significant potential impact, and implied budget/urgency. (Response: Integer from 0-100)\n\nIs this a 'Hot Lead' (meaning immediate need, high urgency, or significant scale)? (Response: `yes` or `no`)\n\nOutput ONLY a JSON object with these keys: `business_opportunity`, `lead_score`, `hot_lead_status`."
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        848,
+        232
+      ],
+      "id": "27e1281b-a081-4654-b42d-3bee2e0da99b",
+      "name": "AI Analyze: Lead Quality & Hot Status"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate a concise executive summary:",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Write a concise summary (max 3 sentences) of the following post from a business perspective, highlighting any problem or need expressed and its potential for an AI automation solution. Focus on the core business challenge.\n\nPost: \"{{ $json.post_text }}\"\n\nConcise Summary:"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        1200,
+        232
+      ],
+      "id": "415fe121-7a46-4ce2-a390-261e84497fab",
+      "name": "AI Generate: Lead Summary"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "post_id",
+              "value": "={{ $json.post_id }}",
+              "type": "string"
+            },
+            {
+              "name": "post_url",
+              "value": "={{ $json.post_url }}",
+              "type": "string"
+            },
+            {
+              "name": "post_title",
+              "value": "={{ $json.post_title }}",
+              "type": "string"
+            },
+            {
+              "name": "post_text",
+              "value": "={{ $json.post_text }}",
+              "type": "string"
+            },
+            {
+              "name": "post_subreddit",
+              "value": "={{ $json.post_subreddit }}",
+              "type": "string"
+            },
+            {
+              "name": "post_date",
+              "value": "={{ $json.post_date }}",
+              "type": "string"
+            },
+            {
+              "name": "business_opportunity",
+              "value": "={{ JSON.parse($json.response.text).business_opportunity }}",
+              "type": "string"
+            },
+            {
+              "name": "lead_score",
+              "value": "={{ JSON.parse($json.response.text).lead_score }}",
+              "type": "number"
+            },
+            {
+              "name": "hot_lead_status",
+              "value": "={{ JSON.parse($json.response.text).hot_lead_status }}",
+              "type": "string"
+            },
+            {
+              "name": "summary",
+              "value": "={{ $json.response.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1552,
+        232
+      ],
+      "id": "3721bb1a-7716-4e9f-9933-fc7e6d5e08cf",
+      "name": "Set: Consolidate Lead Data"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9m0n1o2p-3q4r-5s6t-7u8v-9w0x1y2z3a4b",
+              "leftValue": "={{ $json.hot_lead_status }}",
+              "operandTwo": "yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "9n0o1p2q-3r4s-5t6u-7v8w-9x0y1z2a3b4c",
+              "leftValue": "={{ $json.lead_score }}",
+              "operandTwo": 75,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1776,
+        232
+      ],
+      "id": "957283e7-3580-4b20-9fd1-2a16ee568cc9",
+      "name": "If: Is Hot Lead?"
+    },
+    {
+      "parameters": {
+        "text": "🔥 HOT LEAD ALERT!\n\n*Source*: {{ $json.source_platform }}\n*Title*: {{ $json.post_title }}\n*Summary*: {{ $json.summary }}\n*Lead Score*: {{ $json.lead_score }}/100\n*Link*: {{ $json.post_url }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        160
+      ],
+      "id": "4fda97c0-bba0-41cc-b67d-38b2be344512",
+      "name": "Slack: Notify Team",
+      "webhookId": "dc963344-fb69-44e9-8825-760b86cd37a9"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "YOUR_GOOGLE_SHEETS_DOCUMENT_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "post_id": "={{ $json.post_id }}",
+            "post_url": "={{ $json.post_url }}",
+            "post_title": "={{ $json.post_title }}",
+            "post_text": "={{ $json.post_text }}",
+            "post_subreddit": "={{ $json.post_subreddit }}",
+            "post_date": "={{ $json.post_date }}",
+            "business_opportunity": "={{ $json.business_opportunity }}",
+            "lead_score": "={{ $json.lead_score }}",
+            "hot_lead_status": "={{ $json.hot_lead_status }}",
+            "summary": "={{ $json.summary }}"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2224,
+        232
+      ],
+      "id": "11f5d760-299d-4079-acd2-7cc071b0c970",
+      "name": "Google Sheets: Log Qualified Leads"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        -96
+      ],
+      "id": "47fbfef2-2028-403f-be61-28e75b91b73d",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "text": "🚨 N8N Workflow Error Alert! 🚨\n\n*Workflow*: Multi-Source AI-Powered Lead Generator\n*Error*: {{ $json.errorMessage }}\n*Node*: {{ $json.node.name }}\n*Timestamp*: {{ $now }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        -96
+      ],
+      "id": "7e8bebf9-a290-44f0-ad5d-8545539cadd2",
+      "name": "Slack: Notify Admin",
+      "webhookId": "59b3a06d-3fcb-4f9c-9558-4b32cb2d5725"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-12T01:41:53.535Z",
+  "versionId": "c7946841-ca60-476b-970d-5b357f9ebe7f"
+}
