@@ -1,0 +1,226 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Variable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variable": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-12T02:16:55.168Z",
+  "id": "uMK538vFGgWoFW5P",
+  "isArchived": false,
+  "meta": null,
+  "name": "Proposal",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "6941feea-e093-45ee-ba2f-011ac1f4a0a4",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -208,
+        64
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e980c92c-07d9-400e-b40c-a8fbdbe8bbcb",
+              "name": "aboutMe",
+              "type": "string",
+              "value": "I'm an AI and automation freelancer that builds outreach systems, CRM systems, project management systems, no-code systems, and integrations.|Some notable things I've done:- End to end project management for a $1M/yr copywriting agency- Outbound acquisition system that grew a content company from $10K/mo to $92K/mo in 12 mo- Monday.com CRM and PM for a recruiting company doing >$1M/yr- Automated content generation system for an SEO agency doing >$10M/yr- ClickUp CRM build for a marketing company doing $1M/yr- I run a Make.com community that does $100,000/mo- I run a YouTube channel about automation with over 50,000 subscribers- Email outreach system for a $MM San Diego real estate brokerage that closed $150K revenue in the first three days- Email outreach systems for a $200K/mo ecommerce dog treat company"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3d6be362-8c6d-4148-acf5-7135b96f57eb",
+      "name": "Set Variable",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        16,
+        64
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "468a03c7-1537-435a-9f98-ce7c58a51c8b",
+              "name": "response",
+              "type": "string",
+              "value": "={{ $json.message.content.proposal }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "024f205a-03b3-4549-ab1f-ab4665152311",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1008,
+        64
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={\"jobDescription\":\"{{ $('Execute Workflow Trigger').item.json.query }}\"}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "type": "AIMessagePromptTemplate",
+              "message": "You are a helpful, intelligent Upwork application writer."
+            },
+            {
+              "message": "=I'm an automation specialist applying to jobs on freelance platforms.  Your task is to take as input an Upwork job description and return as output a customized proposal.  High-performing proposals are typically templated as follows:  ``` Hi, I do {thing} all the time. Am so confident I'm the right fit for you that I just created a workflow diagram + a demo of your {thing} in no-code: $$$  About me: I'm a {relevantJobDescription} that has done {coolRelevantThing}. Of note, {otherCoolTieIn}.  Happy to do this for you anytime—just respond to this proposal (else I don't get a chat window).   Thank you! ```  Output your results in JSON using this format:  {\"proposal\":\"Your proposal\"}  Rules: - $$$ is what we're using to replace links later on, so leave that untouched. - Write in a casual, spartan tone of voice. - Don't use emojis or flowery language. - If there's a name included somewhere in the description, add it after \"Hi\"  Some facts about me for the personalization: {{ $json.aboutMe }}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        224,
+        64
+      ],
+      "id": "e5ab8ef1-f55d-411d-bb9f-f5013189cb52",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        160,
+        240
+      ],
+      "id": "fdbdbdf8-7f67-46a8-adb7-bf30ea1d8fc5",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        224
+      ],
+      "id": "950834f1-af59-493c-9705-296e647d0d9c",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        304,
+        368
+      ],
+      "id": "b4113b54-7ca6-49aa-8c40-3e9e405e2415",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-12T02:18:16.781Z",
+  "versionId": "871f3e80-98ca-47da-928a-90960fe2dfd8"
+}
