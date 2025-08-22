@@ -1,0 +1,151 @@
+{
+  "active": false,
+  "connections": {
+    "RSS Read - Trends": {
+      "main": [
+        [
+          {
+            "node": "AI Agent - Social Media Strategist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Social Media Strategist": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Save Trends",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-22T18:52:12.926Z",
+  "id": "65T7LkCXx11DCj5Q",
+  "isArchived": false,
+  "meta": null,
+  "name": "Daily Social Research",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Daily Social Media Trend Research 🚀\n\nThis workflow automates the process of finding daily social media trends relevant to Brand Sprynt, an AI automation agency.\n\n1.  **RSS Read**: Fetches the latest news from a specified RSS feed. **You'll need to enter an RSS feed URL here.**\n2.  **Google Gemini Chat Model**: This is the AI brain for the agent, set to use `gemini-pro`. **Make sure your Google Gemini credentials are configured.**\n3.  **AI Agent**: Acts as a social media strategist. It analyzes the news from the RSS feed, identifies key trends, and generates social media content ideas using the Gemini Chat Model.\n4.  **Google Sheets**: Stores the generated social media content ideas. **You'll need to connect your Google Sheets credentials, specify the Document ID, and the Sheet Name.**\n\nThis setup helps ensure Brand Sprynt stays on top of relevant industry trends for social media content! 🎉",
+        "height": 400,
+        "width": 600
+      },
+      "name": "Workflow Explanation",
+      "position": [
+        304,
+        -256
+      ],
+      "type": "n8n-nodes-base.stickyNote",
+      "id": "generated-0e6bc585-cf65-47c6-8fe1-44637eea6271"
+    },
+    {
+      "parameters": {
+        "options": {
+          "customFields": "",
+          "ignoreSSL": false
+        }
+      },
+      "name": "RSS Read - Trends",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "position": [
+        304,
+        208
+      ],
+      "id": "generated-c2f40587-8aa0-494d-a187-8a43a909956d"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-pro",
+        "options": {
+          "maxOutputTokens": 2048,
+          "temperature": 0.4,
+          "topK": 32,
+          "topP": 1,
+          "safetySettings": {
+            "values": []
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        512,
+        352
+      ],
+      "name": "Google Gemini Chat Model",
+      "id": "generated-4abed9c8-683f-4180-abb6-770f019a8b11"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Analyze the provided news content from the RSS feed. Identify key trends relevant to an AI automation agency like Brand Sprynt. Based on these trends, generate 3-5 social media content ideas (e.g., tweet, LinkedIn post, short video concept) for Brand Sprynt. Include relevant hashtags and a brief explanation of why each idea is trending and suitable.",
+        "options": {
+          "systemMessage": "You are a social media strategist for Brand Sprynt, an AI automation agency. Your goal is to identify trending topics in AI, automation, and social media, and generate creative social media content ideas for the agency.",
+          "maxIterations": 10,
+          "returnIntermediateSteps": false,
+          "passthroughBinaryImages": true,
+          "batching": {
+            "batchSize": 1,
+            "delayBetweenBatches": 0
+          }
+        }
+      },
+      "position": [
+        704,
+        208
+      ],
+      "name": "AI Agent - Social Media Strategist",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "id": "generated-7df8f687-7aba-41c5-a035-2b1234130d0e"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "options": {
+          "cellFormat": "USER_ENTERED",
+          "useAppend": false
+        }
+      },
+      "position": [
+        1008,
+        208
+      ],
+      "type": "n8n-nodes-base.googleSheets",
+      "name": "Google Sheets - Save Trends",
+      "id": "generated-6dc4ba3d-3406-4794-a3aa-d794fa0375e7"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-22T18:52:12.926Z",
+      "updatedAt": "2025-08-22T18:52:12.926Z",
+      "role": "workflow:owner",
+      "workflowId": "65T7LkCXx11DCj5Q",
+      "projectId": "4t37tp0rXqvKIely"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-08-22T18:52:17.038Z",
+      "updatedAt": "2025-08-22T18:52:17.038Z",
+      "id": "RN25fIZQHedNt6t4",
+      "name": "generated"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-22T18:52:18.967Z",
+  "versionId": "6a3ca5a7-b1ba-4ed0-90fc-e35dac622a3a"
+}
