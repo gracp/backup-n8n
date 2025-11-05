@@ -1,0 +1,199 @@
+{
+  "active": false,
+  "connections": {
+    "youtube_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "window_buffer_memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chat_message_received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-29T20:10:13.765Z",
+  "id": "iFWTVdrGAguz8pcs",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "YT Trend Finder (Multi-Agent)",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You help youtube creators find trending videos based on a specific niche.\n\nVerify if the user informed a niche before doing anything. If not, then ask him for one by giving him suggestions for him to select from.\n\nAfter you know what type of content the user might produce, use the \"youtube_search\" tool up to 3 times with different search terms based on the user's content type and niche.\n\nThe tool will answer with a list of videos from the last 2 days that had the most amount of relevancy. It returns a list of json's covering each video's id, view count, like count, comment count, description, channel title, tags and channel id. Each video is separated by \"### NEXT VIDEO FOUND: ###\".\n\nYou should then proceed to understand the data received then provide the user with insightful data of what could be trending from the past 2 days. Provide the user links to the trending videos which should be in this structure:\n\nhttps://www.youtube.com/watch?v={video_id}\n\nto reach the channel's link you should use:\n\nhttps://www.youtube.com/channel/{channel_id}\n\nFind patterns in the tags, titles and especially in the related content for the videos found.\n\nYour mission isn't to find the trending videos. It's to provide the user with valuable information of what is trending in that niche in terms of content news. Remember to provide the user with the numbers of views, likes and comments while commenting about any video. So you should not talk about any particular video, focus rather in explaining the overall scenario of all that was found.\n\nExample of response:\n\n\"It seems like what is trending in digital marketing right now is talking about mental triggers, since 3 of the most trending videos in the last 2 days were about...\""
+        }
+      },
+      "id": "a22237d9-d6a6-4cd3-a836-0ad024f7320e",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        672,
+        -32
+      ],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "00e49500-445e-438f-b78a-d4f4c40ff5c7",
+      "name": "chat_message_received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        448,
+        -32
+      ],
+      "webhookId": "10e2680a-a6b9-4902-aae7-c57e510ee450",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "name": "youtube_search",
+        "description": "Call this tool to search for trending videos based on a query.",
+        "workflowId": {
+          "__rl": true,
+          "value": "LAYuuDZ8GtDy9MAJ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/LAYuuDZ8GtDy9MAJ",
+          "cachedResultName": "YT Trend Finder-Sub"
+        },
+        "specifyInputSchema": true,
+        "jsonSchemaExample": "{\n\t\"search_term\": \"some_value\"\n}"
+      },
+      "id": "c8d47040-c093-428f-984d-3d0d484c1d40",
+      "name": "youtube_search",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        912,
+        96
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {},
+      "id": "ad281c23-cb63-49f2-a779-bd152d3537bd",
+      "name": "window_buffer_memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        768,
+        96
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "content": "Main Workflow",
+        "height": 354.53098948245656,
+        "width": 693.2572054941234,
+        "color": 7
+      },
+      "id": "a2083327-ed2d-449f-a0b5-27eb6f7632a1",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        -96
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        608,
+        96
+      ],
+      "id": "3df205d5-66cb-4b3a-b16a-f443c2d51f63",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "N7WbBL6GvSir5zYS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# YouTube Trend Finder for Content Creators\n\n## 📋 Description\nThis AI-powered workflow helps YouTube creators discover trending videos and analyze content patterns in specific niches. It searches for videos from the past 2 days, analyzes their performance metrics, and provides actionable insights about trending topics, tags, and content themes.\n\n## 🎯 Purpose\n- Find trending videos in specific niches (e.g., AI automation, gaming, cooking, tech reviews)\n- Analyze engagement metrics (views, likes, comments) to identify popular content\n- Discover patterns in successful video topics, tags, and themes\n- Provide creators with data-driven insights for content strategy\n\n## 🔧 Key Components\n\n### 1. **chat_message_received** (Trigger)\n- Initiates the workflow when a user sends a message\n- Serves as the entry point for niche queries\n\n### 2. **AI Agent** (Coordinator)\n- Orchestrates the entire workflow logic\n- Verifies if user specified a niche; if not, requests one with suggestions\n- Executes multiple YouTube searches (up to 3x) with varied search terms\n- Analyzes patterns in video data (tags, titles, content themes)\n- Generates comprehensive trend reports with insights\n\n### 3. **Google Gemini Chat Model** (×2 instances)\n- Powers the AI Agent's conversational abilities\n- Processes natural language queries\n- Generates analytical insights from video data\n\n### 4. **youtube_search** (Tool)\n- Custom tool that searches YouTube for trending videos\n- Filters results to last 2 days for maximum relevancy\n- Returns JSON data: video ID, view count, likes, comments, description, channel info, tags\n- Results separated by \"### NEXT VIDEO FOUND: ###\" marker\n\n### 5. **window_buffer_memory** (×2 instances)\n- Maintains conversation context\n- Remembers user's niche selection\n- Enables coherent multi-turn conversations\n\n## 📖 How to Use\n\n1. **Start a conversation** in the chat interface\n2. **Ask what the workflow can do** or directly specify your niche\n3. **Provide a niche** when prompted (e.g., \"ai automation\", \"fitness\", \"cooking\")\n4. **Wait for analysis** - the AI will search 3 times with different terms\n5. **Review insights** - get trends, patterns, video links, and creator channels\n\n## 📊 Output Format\n\n- Overview of trending themes in the niche\n- Engagement metrics (views, likes, comments) for relevant videos\n- Direct links to trending videos: `https://www.youtube.com/watch?v={video_id}`\n- Channel links: `https://www.youtube.com/channel/{channel_id}`\n- Pattern analysis of tags, titles, and content themes\n- Strategic recommendations for content creation\n\n## 💡 Example Use Case\n\n**Input:** \"ai automation\"\n\n**Output:** Analysis revealing:\n- AI agents & no-code platforms are exploding in popularity\n- Latest AI model releases (GPT-5, Gemini) driving engagement\n- Business applications (SEO, lead gen) are hot topics\n- Niche applications gaining traction (military tech, trading)\n- Specific video examples with metrics and links\n\n## ⚙️ Workflow Logic\n\n1. User sends message → chat_message_received triggers\n2. AI Agent checks if niche is specified\n3. If no niche → requests one with examples\n4. If niche provided → executes 3 YouTube searches with varied terms\n5. Processes JSON results from youtube_search tool\n6. Analyzes patterns across all videos found\n7. Generates comprehensive trend report with links and metrics\n8. Memory maintains context for follow-up questions",
+        "height": 2096,
+        "width": 672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        -672
+      ],
+      "id": "94ffeb85-151b-4326-86c3-2d72fe4719e7",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backup-n8n",
+  "repo_owner": "gracp",
+  "repo_path": "",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-09-29T20:10:13.765Z",
+      "createdAt": "2025-09-29T20:10:13.765Z",
+      "role": "workflow:owner",
+      "workflowId": "iFWTVdrGAguz8pcs",
+      "projectId": "4t37tp0rXqvKIely"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-07-31T09:04:17.725Z",
+      "createdAt": "2025-07-31T09:04:17.725Z",
+      "id": "Gr1DJgWoV8J49LX4",
+      "name": "SSAI Email"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-02T17:49:35.621Z",
+  "versionId": "1457fc5b-a3b0-4cfb-9237-b83df5608989"
+}
